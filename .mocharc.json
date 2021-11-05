@@ -1,0 +1,7 @@
+{
+    "exit": true,
+    "recursive": true,
+    "colors": true,
+    "spec": "tests/**/*.tests.ts",
+    "require": "ts-node/register"
+}

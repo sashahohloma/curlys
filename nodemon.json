@@ -1,0 +1,9 @@
+{
+    "watch": ["source"],
+    "ext": ".ts, .js",
+    "ignore": ["tests"],
+    "exec": " cross-env NODE_ENV=development ts-node --project source/tsconfig.json source/index.ts",
+    "events": {
+        "start": "clear || cls"
+    }
+}
