@@ -7,6 +7,10 @@ import { jsonParse, stringOr } from '@sashahohloma/utilities';
 @Injectable()
 export class HandlebarsConfig {
 
+    private readonly _layouts: string;
+    private readonly _partials: string;
+    private readonly _pages: string;
+
     private readonly _serverURL: string;
     private readonly _manifest: string;
 
@@ -14,6 +18,10 @@ export class HandlebarsConfig {
     private readonly _description: string;
 
     constructor(serverConfig: ServerConfig) {
+        this._layouts = serverConfig.resolveTemplates('layouts');
+        this._partials = serverConfig.resolveTemplates('partials');
+        this._pages = serverConfig.resolveTemplates('pages');
+
         this._serverURL = serverConfig.base;
         this._manifest = serverConfig.manifest;
 
@@ -41,4 +49,17 @@ export class HandlebarsConfig {
             description: () => this._description,
         };
     }
+
+    public get layouts(): string {
+        return this._layouts;
+    }
+
+    public get partials(): string {
+        return this._partials;
+    }
+
+    public get pages(): string {
+        return this._pages;
+    }
+
 }
