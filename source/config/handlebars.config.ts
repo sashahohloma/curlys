@@ -1,8 +1,9 @@
 import { default as fs } from 'fs';
 import { HelperDelegate } from 'handlebars';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { ServerConfig } from './server.config';
 import { jsonParse, stringOr } from '@sashahohloma/utilities';
+import { ServerConfig } from './server.config';
+import { BusinessConfig } from './business.config';
 
 @Injectable()
 export class HandlebarsConfig {
@@ -11,17 +12,22 @@ export class HandlebarsConfig {
     private readonly _partials: string;
     private readonly _pages: string;
 
+    private readonly _phone: string
     private readonly _serverURL: string;
     private readonly _manifest: string;
 
     private readonly _title: string;
     private readonly _description: string;
 
-    constructor(serverConfig: ServerConfig) {
+    constructor(
+        serverConfig: ServerConfig,
+        businessConfig: BusinessConfig,
+    ) {
         this._layouts = serverConfig.resolveTemplates('layouts');
         this._partials = serverConfig.resolveTemplates('partials');
         this._pages = serverConfig.resolveTemplates('pages');
 
+        this._phone = businessConfig.phone;
         this._serverURL = serverConfig.base;
         this._manifest = serverConfig.manifest;
 
@@ -41,9 +47,16 @@ export class HandlebarsConfig {
         return value;
     }
 
+    private waLink(message: string): string {
+        const phone = this._phone.replace(/\D+/g, '');
+        const text = encodeURIComponent(message);
+        return 'https://wa.me/' + phone + '?text=' + text;
+    }
+
     public get helpers(): Record<string, HelperDelegate> {
         return {
             manifest: (filePath: string): string => this.getManifestFile(filePath),
+            waLink: (message: string): string => this.waLink(message),
             url: () => this._serverURL,
             title: () => this._title,
             description: () => this._description,

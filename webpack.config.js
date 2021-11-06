@@ -12,7 +12,7 @@ const publicPath = path.join(__dirname, 'public');
 module.exports = {
     entry: [
         './resources/scripts/main.ts',
-        './resources/styles/main.sass'
+        './resources/styles/main.scss'
     ],
     output: {
         path: publicPath,
@@ -35,7 +35,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.(s[ac]ss|css)$/,
+                test: /\.(scss)$/,
                 use: [
                     // fallback to style-loader in development
                     cssToFile.loader,

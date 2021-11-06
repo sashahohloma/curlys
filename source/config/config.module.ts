@@ -4,6 +4,7 @@ import { ConfigService } from './config.service';
 import { ServerConfig } from './server.config';
 import { PostgresqlConfig } from './postgresql.config';
 import { HandlebarsConfig } from './handlebars.config';
+import { BusinessConfig } from './business.config';
 
 @Module({
     imports: [
@@ -20,6 +21,7 @@ import { HandlebarsConfig } from './handlebars.config';
         ConfigService,
         ServerConfig,
         HandlebarsConfig,
+        BusinessConfig,
         PostgresqlConfig,
     ],
     exports: [
