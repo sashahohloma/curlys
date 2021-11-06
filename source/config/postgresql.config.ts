@@ -7,11 +7,11 @@ import { types } from 'pg';
 @Injectable()
 export class PostgresqlConfig implements TypeOrmOptionsFactory {
 
-    readonly database: string;
-    readonly username: string;
-    readonly password: string;
-    readonly host: string;
-    readonly port: number;
+    private readonly database: string;
+    private readonly username: string;
+    private readonly password: string;
+    private readonly host: string;
+    private readonly port: number;
 
     constructor(configService: ConfigService) {
         this.database = configService.getString('PG_DATABASE');
