@@ -1,0 +1,11 @@
+@mixin backgroundImage($position: center, $size: cover) {
+    @if $position {
+        background-position: $position;
+    }
+    background-repeat: no-repeat;
+    background-size: $size;
+}
+
+@mixin backgroundGradient {
+    background-image: linear-gradient(135deg, $color-red 0%, $color-orange 100%);
+}

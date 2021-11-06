@@ -1,6 +1,5 @@
 {
     "name": "curlys-store",
-    "main": "index.ts",
     "private": true,
     "author": "Alexander Smirnov",
     "version": "1.1.0",
@@ -9,10 +8,8 @@
         "backend:clear": "rm -rfv build",
         "backend:compile": "npm run backend:clear && tsc --project source/tsconfig.json",
         "backend:live": "nodemon",
-        "backend:check": "tsc --noEmit --project tsconfig.backend.json",
         "frontend:compile": "webpack --config=webpack.config.js --mode=production",
         "frontend:watch": "webpack --watch --config=webpack.config.js --mode=development",
-        "frontend:check": "tsc --noEmit --project tsconfig.frontend.json",
         "dev:check": "tsc --noEmit",
         "dev:lint": "eslint ./source --ext .ts,.tsx",
         "commit": "git-cz",

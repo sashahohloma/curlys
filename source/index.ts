@@ -20,14 +20,15 @@ const bootstrap = async() => {
     }));
 
     app.useStaticAssets(config.public);
-    app.setBaseViewsDir(config.templates);
+    app.setBaseViewsDir(hbsConfig.pages);
 
     handlebars.registerHelper(hbsConfig.helpers);
 
     app.setViewEngine('hbs');
     app.engine('hbs', expressHbs({
-        layoutsDir: config.templates,
-        defaultLayout: 'layout',
+        partialsDir: hbsConfig.partials,
+        layoutsDir: hbsConfig.layouts,
+        defaultLayout: 'common',
         extname: 'hbs',
     }));
 

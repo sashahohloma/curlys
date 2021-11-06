@@ -1,0 +1,7 @@
+@mixin fontText() {
+    font-family: 'Montserrat', 'Arial', sans-serif;
+}
+
+@mixin fontTitle($line-height: 1) {
+    font-family: 'Comfortaa', 'Comic Sans MS', cursive;
+}
