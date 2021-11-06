@@ -1,7 +1,8 @@
 /.nyc_output
 /build
-/node_modules
+**/node_modules
 /logs
+/public
 .env
 .env.development
 npm-debug.log
