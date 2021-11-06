@@ -3,7 +3,7 @@
     "main": "index.ts",
     "private": true,
     "author": "Alexander Smirnov",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "scripts": {
         "backend:run": "node build/index.js",
         "backend:clear": "rm -rfv build",
