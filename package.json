@@ -29,6 +29,7 @@
         "date-fns": "2.24.0",
         "express-handlebars": "5.3.4",
         "hbs": "4.1.2",
+        "jump.js": "1.0.2",
         "pg": "8.6.0",
         "pg-types": "2.2.0",
         "typeorm": "0.2.38"
@@ -39,6 +40,7 @@
         "@types/express": "4.17.11",
         "@types/express-handlebars": "5.3.1",
         "@types/hbs": "4.0.1",
+        "@types/jump.js": "1.0.4",
         "@types/mocha": "9.0.0",
         "@types/pg": "8.6.1",
         "@typescript-eslint/eslint-plugin": "4.30.0",

@@ -1,3 +1,30 @@
-<navbar>
-    logo
-</navbar>
+<nav class="navbar">
+    <a class="navbar__homepage" href="/">
+        <img class="navbar__logo" src="{{ manifest 'images/logo.svg' }}" alt="{{ title }}"/>
+    </a>
+    <ul class="navbar__links">
+        <li class="navbar__link">
+            <a class="navbar__anchor smooth" href="#catalog">
+                Каталог десертов
+            </a>
+        </li>
+        <li class="navbar__link">
+            <a class="navbar__anchor smooth" href="#reviews">
+                Отзывы
+            </a>
+        </li>
+        <li class="navbar__link">
+            <a class="navbar__anchor smooth" href="#inforamtion">
+                Доставка и оплата
+            </a>
+        </li>
+        <li class="navbar__link">
+            <a class="navbar__anchor smooth" href="#contacts">
+                Контакты
+            </a>
+        </li>
+    </ul>
+    <a class="navbar__question" href="{{ waLink 'Здравствуйте! Хочу задать вопрос: ' }}" target="_blank">
+        Задать вопрос
+    </a>
+</nav>
