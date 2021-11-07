@@ -1,5 +1,5 @@
 import { default as fs } from 'fs';
-import { HelperDelegate } from 'handlebars';
+import { HelperDelegate, HelperOptions } from 'handlebars';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { jsonParse, stringOr } from '@sashahohloma/utilities';
 import { ServerConfig } from './server.config';
@@ -47,6 +47,22 @@ export class HandlebarsConfig {
         return value;
     }
 
+    private getTimes(n: number, block: HelperOptions): string {
+        let acc = '';
+        for (let index = 1; index <= n; index++) {
+            acc += block.fn(index);
+        }
+        return acc;
+    }
+
+    private isStarActive(count: number, rating: number): boolean {
+        return count <= rating;
+    }
+
+    private productLink(slug: string): string {
+        return 'product/' + slug;
+    }
+
     private waLink(message: string): string {
         const phone = this._phone.replace(/\D+/g, '');
         const text = encodeURIComponent(message);
@@ -56,6 +72,9 @@ export class HandlebarsConfig {
     public get helpers(): Record<string, HelperDelegate> {
         return {
             manifest: (filePath: string): string => this.getManifestFile(filePath),
+            times: (n: number, block: HelperOptions): string => this.getTimes(n, block),
+            isStarActive: (count: number, rating: number): boolean => this.isStarActive(count, rating),
+            productLink: (slug: string): string => this.productLink(slug),
             waLink: (message: string): string => this.waLink(message),
             url: () => this._serverURL,
             title: () => this._title,

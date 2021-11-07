@@ -38,26 +38,6 @@
     }
 
     &__question {
-        @include fontTitle;
-        display: flex;
-        padding: 12px 24px;
-        transition-duration: .15s;
-        background-color: $color-red;
-        border-radius: $border-radius;
-        color: $color-white;
-        font-size: 1em;
-        text-decoration: none;
-
-        &:hover {
-            background-color: darken($color-red, 15);
-        }
-
-        &:active {
-            background-color: darken($color-red, 20);
-        }
-
-        &:disabled {
-            background-color: lighten($color-red, 20);
-        }
+        @include button($color-red);
     }
 }

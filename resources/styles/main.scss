@@ -1,6 +1,7 @@
 @import 'mixins/fonts';
-@import 'mixins/button';
 @import 'mixins/backgrounds';
+@import 'mixins/button';
+@import 'mixins/oval';
 @import 'mixins/container';
 @import 'mixins/responsive';
 
@@ -8,5 +9,7 @@
 
 @import 'blocks/body';
 @import 'blocks/navbar';
+@import 'blocks/main';
 
+@import 'modules/swiper/main';
 @import 'modules/modal';
