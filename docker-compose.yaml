@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  database:
+    image: postgres:latest
+    ports:
+      - 50040:5432
+    volumes:
+      - ./database/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=curlys
+      - POSTGRES_USER=curlys
+      - POSTGRES_PASSWORD=b9ysCVHT8gcpdUEWSSHH3n49
+    restart: unless-stopped

@@ -12,6 +12,7 @@
         "frontend:watch": "webpack --watch --config=webpack.config.js --mode=development",
         "dev:check": "tsc --noEmit",
         "dev:lint": "eslint ./source --ext .ts,.tsx",
+        "typeorm": "ts-node ./node_modules/typeorm/cli",
         "commit": "git-cz",
         "release": "semantic-release --no-verify",
         "postinstall": "husky install"
