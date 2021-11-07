@@ -1,0 +1,3 @@
+{
+    "migrations": "npm run typeorm migration:generate -- -n create-tables"
+}

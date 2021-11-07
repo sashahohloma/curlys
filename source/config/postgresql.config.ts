@@ -12,13 +12,15 @@ export class PostgresqlConfig implements TypeOrmOptionsFactory {
     private readonly password: string;
     private readonly host: string;
     private readonly port: number;
+    private readonly logging: boolean;
 
     constructor(configService: ConfigService) {
-        this.database = configService.getString('PG_DATABASE');
-        this.username = configService.getString('PG_USERNAME');
-        this.password = configService.getString('PG_PASSWORD');
-        this.host = configService.getString('PG_HOST');
-        this.port = configService.getNumber('PG_PORT');
+        this.database = configService.getString('TYPEORM_DATABASE');
+        this.username = configService.getString('TYPEORM_USERNAME');
+        this.password = configService.getString('TYPEORM_PASSWORD');
+        this.host = configService.getString('TYPEORM_HOST');
+        this.port = configService.getNumber('TYPEORM_PORT');
+        this.logging = configService.getBoolean('TYPEORM_LOGGING');
 
         this.setTypings();
     }
@@ -33,12 +35,13 @@ export class PostgresqlConfig implements TypeOrmOptionsFactory {
     public createTypeOrmOptions(): TypeOrmModuleOptions {
         const config: TypeOrmModuleOptions = {
             type: 'postgres',
-            useUTC: true,
             database: this.database,
             username: this.username,
             password: this.password,
             host: this.host,
             port: this.port,
+            logging: this.logging,
+            useUTC: true,
         };
         return config;
     }
