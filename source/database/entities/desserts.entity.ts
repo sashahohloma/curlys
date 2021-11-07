@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, Check, CreateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, Check, CreateDateColumn, JoinColumn, OneToMany } from 'typeorm';
 import { ImagesEntity } from './images.entity';
+import { ReviewsEntity } from './reviews.entity';
 
 @Entity({ schema: 'curlys', name: 'desserts' })
 @Check('protein > 0')
@@ -12,6 +13,9 @@ export class DessertsEntity {
 
     @PrimaryGeneratedColumn('uuid')
     public uuid: string;
+
+    @Column({ type: 'varchar', length: 50, unique: true })
+    public slug: string;
 
     @Column({ type: 'varchar', length: 100 })
     public name: string;
@@ -52,5 +56,9 @@ export class DessertsEntity {
         },
     })
     readonly images: ImagesEntity[];
+
+    @OneToMany(() => ReviewsEntity, (reviews) => reviews.dessert)
+    @JoinColumn({ name: 'uuid', referencedColumnName: 'dessert_uuid' })
+    readonly reviews: ReviewsEntity[];
 
 }

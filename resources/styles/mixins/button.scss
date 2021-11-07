@@ -1,7 +1,32 @@
-@mixin button() {
+@mixin button($color) {
     -webkit-appearance: none;
+    
+    display: flex;
+    
     margin: 0;
+    padding: 12px 24px;
+    background-color: $color;
+    border-radius: $border-radius;
     border: 0;
-    font-family: inherit;
+    
+    transition-duration: .15s;
+    
+    @include fontTitle;
+    color: $color-white;
+    font-size: 1em;
+
+    text-decoration: none;
     cursor: pointer;
+
+    &:hover {
+        background-color: darken($color-red, 15);
+    }
+
+    &:active {
+        background-color: darken($color-red, 20);
+    }
+
+    &:disabled {
+        background-color: lighten($color-red, 20);
+    }
 }

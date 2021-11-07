@@ -3,6 +3,9 @@ import { TypeOrmOptionsFactory, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ConfigService } from './config.service';
 import { TypeId } from './pg.types';
 import { types } from 'pg';
+import { DessertsEntity } from '../database/entities/desserts.entity';
+import { ImagesEntity } from '../database/entities/images.entity';
+import { ReviewsEntity } from '../database/entities/reviews.entity';
 
 @Injectable()
 export class PostgresqlConfig implements TypeOrmOptionsFactory {
@@ -41,6 +44,12 @@ export class PostgresqlConfig implements TypeOrmOptionsFactory {
             host: this.host,
             port: this.port,
             logging: this.logging,
+            entities: [
+                DessertsEntity,
+                ImagesEntity,
+                ReviewsEntity,
+            ],
+            synchronize: true,
             useUTC: true,
         };
         return config;

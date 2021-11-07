@@ -1,4 +1,55 @@
 {{> navbar }}
-<p>
-    {{ message }}
-</p>
+<main class="main swiper" style="background-image: url({{ manifest 'images/background.webp' }});">
+    <div class="main__slider swiper-wrapper">
+        {{#each desserts as |dessert| }}
+
+            <div class="swiper-slide">
+                <div class="main__container">
+                    <div class="main__collage">
+                        <div class="main__image">
+                            <img
+                                class="main__img"
+                                src="data:image/webp;base64,{{ dessert.images.[0].original }}"
+                                alt={{ dessert.name }}
+                            />
+                        </div>
+                        <div class="main__oval main__oval_orange"></div>
+                        <div class="main__oval main__oval_red"></div>
+                    </div>
+                    <div class="main__information">
+                        <h2 class="main__title">
+                            {{ dessert.name }}
+                        </h2>
+                        <p class="main__description">
+                            {{ dessert.description }} 
+                        </p>
+                        <div class="main__rating">
+                            <div class="main__stars">
+                                {{#times 5 }}
+                                    {{#if (isStarActive this dessert.rating) }}
+                                        <svg class="main__star main__star_active">
+                                            <use xlink:href="{{ manifest 'images/star.svg' }}#star"></use>
+                                        </svg>
+                                    {{else}}
+                                        <svg class="main__star">
+                                            <use xlink:href="{{ manifest 'images/star.svg' }}#star"></use>
+                                        </svg>
+                                    {{/if}}
+                                {{/times}}
+                            </div>
+                            <div class="main__count">
+                                ( {{ dessert.reviews.length }} )
+                            </div>
+                        </div>
+                        <div class="main__details">
+                            <a class="main__link" href="{{ productLink dessert.slug }}" title="{{ dessert.name }}">
+                                Подробнее
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {{/each}}
+    </div>
+</main>

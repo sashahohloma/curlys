@@ -3,7 +3,7 @@
     font-weight: 400;
 }
 
-@mixin fontTitle($line-height: 1) {
+@mixin fontTitle() {
     font-family: 'Comfortaa', 'Comic Sans MS', cursive;
     font-weight: 700;
 }
