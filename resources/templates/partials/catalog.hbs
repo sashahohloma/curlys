@@ -1,0 +1,10 @@
+<div id="{{ id }}" class="catalog">
+    <h3 class="catalog__title">
+        {{ title }}
+    </h3>
+    <div class="catalog__list">
+        {{#each desserts as |dessert| }}
+            {{> card dessert=dessert }}
+        {{/each}}
+    </div>
+</div>

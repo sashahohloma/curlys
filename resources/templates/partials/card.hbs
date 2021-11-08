@@ -1,0 +1,20 @@
+<div class="card">
+    <a class="card__image" href="{{ productLink dessert.slug }}">
+        <img class="card__img" src="data:image/webp;base64,{{ dessert.images.[0].original }}" alt={{ dessert.name }}/>
+    </a>
+    <a class="card__title" href="{{ productLink dessert.slug }}">
+        {{ dessert.name }}
+    </a>
+    <div class="card__rating">
+        {{> rating rating=dessert.rating reviews=dessert.reviews.length }}
+    </div>
+    <p class="card__description">
+        {{ dessert.description }}
+    </p>
+    <div class="card__price">
+        {{ dessert.price }} ₽
+    </div>
+    <a class="card__order" href="{{ orderLink dessert.name dessert.quantity }}" target="_blank">
+        Заказать
+    </a>
+</div>

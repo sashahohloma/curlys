@@ -19,14 +19,14 @@
     cursor: pointer;
 
     &:hover {
-        background-color: darken($color-red, 15);
+        background-color: darken($color, 15);
     }
 
     &:active {
-        background-color: darken($color-red, 20);
+        background-color: darken($color, 20);
     }
 
     &:disabled {
-        background-color: lighten($color-red, 20);
+        background-color: lighten($color, 20);
     }
 }

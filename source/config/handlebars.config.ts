@@ -69,6 +69,13 @@ export class HandlebarsConfig {
         return 'https://wa.me/' + phone + '?text=' + text;
     }
 
+    private orderLink(name: string, quantity: number): string {
+        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+        const quantityWord = quantity < 4 ? 'штуки' : 'штук';
+        const message = `Здравствуйте! Хочу заказать десерт: ${name}, ${quantity} ${quantityWord} в упаковке`;
+        return this.waLink(message);
+    }
+
     public get helpers(): Record<string, HelperDelegate> {
         return {
             manifest: (filePath: string): string => this.getManifestFile(filePath),
@@ -76,8 +83,9 @@ export class HandlebarsConfig {
             isStarActive: (count: number, rating: number): boolean => this.isStarActive(count, rating),
             productLink: (slug: string): string => this.productLink(slug),
             waLink: (message: string): string => this.waLink(message),
+            orderLink: (name: string, quantity: number): string => this.orderLink(name, quantity),
             url: () => this._serverURL,
-            title: () => this._title,
+            pageTitle: () => this._title,
             description: () => this._description,
         };
     }

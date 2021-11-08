@@ -1,0 +1,33 @@
+.rating {
+    display: grid;
+    align-items: center;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    column-gap: 15px;
+
+    &__stars {
+        display: grid;
+        grid-template-columns: repeat(5, min-content);
+        column-gap: 10px;
+    }
+
+    &__star {
+        display: flex;
+        width: 21px;
+        height: 20px;
+        color: darken($color-gray, 20);
+
+        &_active {
+            color: $color-orange;
+        }
+    }
+
+    &__count {
+        @include fontTitle;
+        display: block;
+        margin: 0;
+        font-size: 1.125em;
+        line-height: 1.4285em;
+        white-space: nowrap;
+    }
+}
