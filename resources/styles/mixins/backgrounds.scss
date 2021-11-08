@@ -9,3 +9,19 @@
 @mixin backgroundGradient {
     background-image: linear-gradient(135deg, $color-red 0%, $color-orange 100%);
 }
+
+@mixin backgroundBlurred {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+
+    transform: scale(1.1);
+
+    @include backgroundImage;
+    background-color: $color-gray;
+
+    filter: blur(10px);
+    z-index: -1;
+}

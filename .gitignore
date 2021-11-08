@@ -9,6 +9,7 @@ npm-debug.log
 yarn-error.log
 .rnd
 database/data
+database/cache
 ormconfig.json
 *.DS_Store
 *.code-workspace

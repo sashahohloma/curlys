@@ -1,4 +1,4 @@
-@mixin button($color) {
+@mixin button($color, $font: 1em) {
     -webkit-appearance: none;
     
     display: flex;
@@ -13,7 +13,7 @@
     
     @include fontTitle;
     color: $color-white;
-    font-size: 1em;
+    font-size: $font;
 
     text-decoration: none;
     cursor: pointer;
@@ -22,11 +22,18 @@
         background-color: darken($color, 15);
     }
 
-    &:active {
+    &:active,
+    &_active {
         background-color: darken($color, 20);
     }
 
-    &:disabled {
+    &:disabled,
+    &_disabled {
         background-color: lighten($color, 20);
+        cursor: default;
+
+        &:hover {
+            background-color: lighten($color, 20);
+        }
     }
 }

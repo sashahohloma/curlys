@@ -1,0 +1,15 @@
+export enum Limits {
+    two = 2,
+    four = 4,
+    five = 5,
+    ten = 10,
+    twelve = 20,
+    thirty = 30,
+    fifty = 50,
+    oneHundred = 100,
+    twoHundred = 200,
+    threeHundred = 300,
+    oneThousand = 1000,
+    twoThousand = 2000,
+    fourThousand = 4000,
+}

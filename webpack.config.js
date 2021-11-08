@@ -1,4 +1,5 @@
 // PLUGINS
+const { DefinePlugin } = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
@@ -8,6 +9,9 @@ const cssToFile = require('mini-css-extract-plugin');
 // PATHES
 const path = require('path');
 const publicPath = path.join(__dirname, 'public');
+
+// DOTENV
+const dotenv = require('dotenv').config();
 
 module.exports = {
     entry: [
@@ -57,6 +61,11 @@ module.exports = {
         ]
     },
     plugins: [
+        new DefinePlugin({
+            'process.env': JSON.stringify({
+                ...dotenv.parsed,
+            }),
+        }),
         new WebpackManifestPlugin({
             basePath: '',
             publicPath: '',

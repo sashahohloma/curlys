@@ -1,0 +1,67 @@
+.personal {
+    position: relative;
+    overflow: hidden;
+
+    &__background {
+        @include backgroundBlurred;
+    }
+
+    &__container {
+        @include container;
+        display: grid;
+        align-items: center;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    &__image {
+        width: 306px;
+        height: 510px;
+        object-fit: contain;
+        object-position: bottom center;
+        margin-top: 60px;
+    }
+
+    &__information {
+        display: grid;
+        grid-template-columns: 100%;
+        justify-items: start;
+        row-gap: 30px;
+    }
+
+    &__title {
+        margin: 0;
+
+        @include fontTitle;
+        font-size: 3em;
+    }
+
+    &__text {
+        margin: 0;
+
+        @include fontText;
+        font-size: 1.2857em;
+    }
+
+    &__instagram {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        column-gap: 20px;
+    }
+
+    &__post {
+        display: flex;
+        width: 100px;
+        height: 100px;
+        @include backgroundImage;
+        background-color: $color-gray;
+        border-radius: $border-radius;
+    }
+
+    &__more {
+        @include button(
+            $color: $color-red,
+            $font: 1.1425em,
+        );
+    }
+
+}

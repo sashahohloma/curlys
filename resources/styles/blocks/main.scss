@@ -1,7 +1,10 @@
 .main {
-    @include backgroundImage;
     padding-top: 180px;
     padding-bottom: 210px;
+
+    &__background {
+        @include backgroundBlurred;
+    }
 
     &__container {
         @include container;
