@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { ValidationPipe } from '@nestjs/common';
+import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { default as expressHbs } from 'express-handlebars';
 import { default as handlebars } from 'handlebars';
@@ -18,6 +18,13 @@ const bootstrap = async() => {
     app.useGlobalPipes(new ValidationPipe({
         transform: true,
     }));
+
+    app.enableVersioning({
+        type: VersioningType.URI,
+    });
+    app.setGlobalPrefix('api', {
+        exclude: ['/'],
+    });
 
     app.useStaticAssets(config.public);
     app.setBaseViewsDir(hbsConfig.pages);

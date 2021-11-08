@@ -1,0 +1,22 @@
+<div class="personal">
+    <div class="personal__background" style="background-image: url({{ manifest 'images/background.webp' }});"></div>
+    <div class="personal__container">
+        <img class="personal__image" src="{{ manifest 'images/personal.webp' }}" alt="Кондитер Виктория Смирнова" />
+        <div class="personal__information">
+            <h2 class="personal__title">
+                Виктория Смирнова
+            </h2>
+            <p class="personal__text">
+                Профессиональный домашний кондитер с богатым опытом работы. Каждый десерт готовит с особым трепетом к рецептуре и насыщенным домашним вкусом
+            </p>
+            <div class="personal__instagram">
+                {{#times 4 }}
+                    <a href="#" class="personal__post"></a>
+                {{/times}}
+            </div>
+            <a href="#" class="personal__more personal__more_disabled" disabled="true">
+                Загрузка...
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  database:
+  postgres:
     image: postgres:latest
     ports:
       - 50040:5432
@@ -11,4 +11,14 @@ services:
       - POSTGRES_DB=curlys
       - POSTGRES_USER=curlys
       - POSTGRES_PASSWORD=b9ysCVHT8gcpdUEWSSHH3n49
+    restart: unless-stopped
+
+  redis:
+    image: redis:latest
+    ports:
+      - 60039:6379
+    volumes:
+      - ./database/cache:/data
+    command: >
+      --requirepass RE3nKn3kPSu3qPua
     restart: unless-stopped

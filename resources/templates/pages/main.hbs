@@ -1,6 +1,7 @@
 {{> navbar }}
 
-<main class="main swiper" style="background-image: url({{ manifest 'images/background.webp' }});">
+<main class="main swiper">
+    <div class="main__background" style="background-image: url({{ manifest 'images/background.webp' }});"></div>
     <div class="main__slider swiper-wrapper">
         {{#each desserts as |dessert| }}
 
@@ -41,3 +42,5 @@
 {{> advantages }}
 
 {{> catalog id='catalog' title='Каталог десертов' desserts=desserts }}
+
+{{> personal }}
