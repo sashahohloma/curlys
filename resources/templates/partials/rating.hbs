@@ -1,0 +1,18 @@
+<div class="rating">
+    <div class="rating__stars">
+        {{#times 5 }}
+            {{#if (isStarActive this ../rating) }}
+                <svg class="rating__star rating__star_active">
+                    <use xlink:href="{{ manifest 'images/star.svg' }}#star"></use>
+                </svg>
+            {{else}}
+                <svg class="rating__star">
+                    <use xlink:href="{{ manifest 'images/star.svg' }}#star"></use>
+                </svg>
+            {{/if}}
+        {{/times}}
+    </div>
+    <div class="rating__count">
+        ( {{ reviews }} )
+    </div>
+</div>
