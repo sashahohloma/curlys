@@ -5,6 +5,7 @@ import { TypeId } from './pg.types';
 import { types } from 'pg';
 import { DessertsEntity } from '../database/entities/desserts.entity';
 import { ImagesEntity } from '../database/entities/images.entity';
+import { InstagramEntity } from '../database/entities/instagram.entity';
 import { ReviewsEntity } from '../database/entities/reviews.entity';
 
 @Injectable()
@@ -47,6 +48,7 @@ export class PostgresqlConfig implements TypeOrmOptionsFactory {
             entities: [
                 DessertsEntity,
                 ImagesEntity,
+                InstagramEntity,
                 ReviewsEntity,
             ],
             synchronize: true,

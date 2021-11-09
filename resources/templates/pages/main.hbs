@@ -11,7 +11,7 @@
                         <div class="main__image">
                             <img
                                 class="main__img"
-                                src="data:image/webp;base64,{{ dessert.images.[0].original }}"
+                                src="data:image/webp;base64,{{ dessert.images.[0].content }}"
                                 alt={{ dessert.name }}
                             />
                         </div>
@@ -43,4 +43,4 @@
 
 {{> catalog id='catalog' title='Каталог десертов' desserts=desserts }}
 
-{{> personal }}
+{{> personal instagram=instagram }}

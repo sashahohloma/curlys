@@ -1,0 +1,1 @@
+Для преобразования изображений в формате `webp` в `base64` строку необходимо использовать онлайн-конвертер [base64.guru](https://base64.guru/converter/encode/image/webp)
