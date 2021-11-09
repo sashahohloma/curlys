@@ -1,4 +1,4 @@
-import Swiper, { Autoplay, Navigation } from 'swiper';
+import Swiper, { Autoplay } from 'swiper';
 
 const startAnimation = (element: Element, selector: string, classname: string): void => {
     const child = element.querySelector(selector);
@@ -21,7 +21,7 @@ const slidesAnimation = (swiper: Swiper) => {
 export const slider = new Swiper('.swiper', {
     modules: [
         Autoplay,
-        Navigation,
+        // Navigation,
     ],
     loop: true,
     allowTouchMove: false,
