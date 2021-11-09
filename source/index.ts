@@ -23,7 +23,10 @@ const bootstrap = async() => {
         type: VersioningType.URI,
     });
     app.setGlobalPrefix('api', {
-        exclude: ['/'],
+        exclude: [
+            '/',
+            'image/:image',
+        ],
     });
 
     app.useStaticAssets(config.public);

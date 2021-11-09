@@ -11,8 +11,8 @@
                         <div class="main__image">
                             <img
                                 class="main__img"
-                                src="data:image/webp;base64,{{ dessert.images.[0].content }}"
-                                alt={{ dessert.name }}
+                                src="{{ imageLink dessert.images.[0].uuid }}"
+                                alt="{{ dessert.name }}"
                             />
                         </div>
                         <div class="main__oval main__oval_orange"></div>

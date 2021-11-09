@@ -1,5 +1,5 @@
 import { Buffer } from 'buffer';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { EntityManager, Repository } from 'typeorm';
 import { default as got } from 'got';
 import { default as sharp } from 'sharp';
@@ -34,6 +34,16 @@ export class ImagesService {
 
         const image = await this.imagesRepository.save(entity);
         return image;
+    }
+
+    public async get(uuid: string): Promise<Buffer> {
+        const image = await this.imagesRepository.findOne({
+            where: { uuid },
+        });
+        if (image === undefined) {
+            throw new NotFoundException();
+        }
+        return Buffer.from(image.content, 'base64');
     }
 
 }

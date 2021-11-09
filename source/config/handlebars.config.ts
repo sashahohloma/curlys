@@ -65,8 +65,12 @@ export class HandlebarsConfig {
         return count <= rating;
     }
 
+    private imageLink(imageUUID: string): string {
+        return this._serverURL + '/image/' + imageUUID;
+    }
+
     private productLink(slug: string): string {
-        return 'product/' + slug;
+        return this._serverURL + '/product/' + slug;
     }
 
     private waLink(message: string): string {
@@ -96,6 +100,7 @@ export class HandlebarsConfig {
             manifest: (filePath: string): string => this.getManifestFile(filePath),
             times: (n: number, block: HelperOptions): string => this.getTimes(n, block),
             isStarActive: (count: number, rating: number): boolean => this.isStarActive(count, rating),
+            imageLink: (imageUUID: string): string => this.imageLink(imageUUID),
             productLink: (slug: string): string => this.productLink(slug),
             waLink: (message: string): string => this.waLink(message),
             orderLink: (name: string, quantity: number): string => this.orderLink(name, quantity),

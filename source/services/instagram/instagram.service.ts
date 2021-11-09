@@ -55,7 +55,6 @@ export class InstagramService {
 
     public async getPosts(): Promise<InstagramEntity[]> {
         const list = await this.instagramRepository.find({
-            relations: ['photo'],
             order: { createdAt: 'DESC' },
             take: 4,
         });
