@@ -1,6 +1,6 @@
 <div class="card">
     <a class="card__image" href="{{ productLink dessert.slug }}">
-        <img class="card__img" src="data:image/webp;base64,{{ dessert.images.[0].original }}" alt={{ dessert.name }}/>
+        <img class="card__img" src="data:image/webp;base64,{{ dessert.images.[0].content }}" alt={{ dessert.name }}/>
     </a>
     <a class="card__title" href="{{ productLink dessert.slug }}">
         {{ dessert.name }}

@@ -10,12 +10,26 @@
                 Профессиональный домашний кондитер с богатым опытом работы. Каждый десерт готовит с особым трепетом к рецептуре и насыщенным домашним вкусом
             </p>
             <div class="personal__instagram">
-                {{#times 4 }}
-                    <a href="#" class="personal__post"></a>
-                {{/times}}
+                {{#each instagram.posts as |post| }}
+                    <a
+                        href="{{ instagramPostLink shortcode }}"
+                        class="personal__post"
+                        target="_blank"
+                    >
+                        <img
+                            class="personal__thumb"
+                            src="data:image/webp;base64,{{ post.photo.content }}"
+                            alt="{{ post.shortcode }}"
+                        />
+                    </a>
+                {{/each}}
             </div>
-            <a href="#" class="personal__more personal__more_disabled" disabled="true">
-                Загрузка...
+            <a
+                href="{{ instagramProfileLink instagram.username }}"
+                class="personal__more"
+                target="_blank"
+            >
+                @{{ instagram.username }}
             </a>
         </div>
     </div>

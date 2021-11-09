@@ -4,9 +4,12 @@ import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { jsonParse, stringOr } from '@sashahohloma/utilities';
 import { ServerConfig } from './server.config';
 import { BusinessConfig } from './business.config';
+import { InstagramConfig } from './instagram.config';
 
 @Injectable()
 export class HandlebarsConfig {
+
+    private readonly _instagramURL: string;
 
     private readonly _layouts: string;
     private readonly _partials: string;
@@ -22,10 +25,13 @@ export class HandlebarsConfig {
     constructor(
         serverConfig: ServerConfig,
         businessConfig: BusinessConfig,
+        instagramConfig: InstagramConfig,
     ) {
         this._layouts = serverConfig.resolveTemplates('layouts');
         this._partials = serverConfig.resolveTemplates('partials');
         this._pages = serverConfig.resolveTemplates('pages');
+
+        this._instagramURL = instagramConfig.baseURL;
 
         this._phone = businessConfig.phone;
         this._serverURL = serverConfig.base;
@@ -76,6 +82,15 @@ export class HandlebarsConfig {
         return this.waLink(message);
     }
 
+    private instagramProfileLink(username: string): string {
+        return this._instagramURL + '/' + username;
+    }
+
+    private instagramPostLink(shortcode: string): string {
+        return this._instagramURL + '/p/' + shortcode;
+    }
+
+
     public get helpers(): Record<string, HelperDelegate> {
         return {
             manifest: (filePath: string): string => this.getManifestFile(filePath),
@@ -84,6 +99,8 @@ export class HandlebarsConfig {
             productLink: (slug: string): string => this.productLink(slug),
             waLink: (message: string): string => this.waLink(message),
             orderLink: (name: string, quantity: number): string => this.orderLink(name, quantity),
+            instagramProfileLink: (username: string): string => this.instagramProfileLink(username),
+            instagramPostLink: (shortcode: string): string => this.instagramPostLink(shortcode),
             url: () => this._serverURL,
             pageTitle: () => this._title,
             description: () => this._description,

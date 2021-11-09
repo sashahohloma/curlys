@@ -1,30 +1,86 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRedis, RedisService } from '@sashahohloma/nestjs/modules/redis';
-import { default as got } from 'got';
-import { INSTAGRAM_CACHE } from './instagram.models';
-import { Hours } from '../../constants/times.constants';
+import { EntityManager, In, Repository } from 'typeorm';
+import { default as instagram } from 'user-instagram';
+import { Instagram, InstagramFields } from './instagram.models';
+import { InstagramConfig } from '../../config/instagram.config';
+import { InstagramMappers } from './instagram.mappers';
+import { InstagramEntity } from '../../database/entities/instagram.entity';
+import { ImagesEntity } from '../../database/entities/images.entity';
+import { ImagesService } from '../images/images.service';
 
 @Injectable()
 export class InstagramService {
 
-    private readonly redisService: RedisService;
+    private readonly entityManager: EntityManager;
+    private readonly instagramRepository: Repository<InstagramEntity>;
 
-    constructor(@InjectRedis() redisService: RedisService) {
-        this.redisService = redisService;
+    private readonly imagesService: ImagesService;
+
+    private readonly username: string;
+    private readonly password: string;
+
+    constructor(
+        entityManager: EntityManager,
+        instagramConfig: InstagramConfig,
+        imagesService: ImagesService,
+    ) {
+        this.entityManager = entityManager;
+        this.instagramRepository = entityManager.getRepository(InstagramEntity);
+
+        this.imagesService = imagesService;
+
+        this.username = instagramConfig.username;
+        this.password = instagramConfig.password;
     }
 
-    public getUser(name: string): Promise<string> {
-        const cacheKey = this.redisService.makeKey(INSTAGRAM_CACHE, name);
-        return this.redisService.getCachedOr(cacheKey, async() => {
+    private async authenticate(): Promise<void> {
+        await instagram.authenticate(this.username, this.password);
+    }
 
-            const url = 'https://www.instagram.com/' + name;
-            const response = await got(url, {
-                method: 'get',
-                searchParams: { __a: 1 },
-            });
-            return response.body;
+    public async getUser(name: string): Promise<Instagram> {
+        await this.authenticate();
 
-        }, Hours.four);
+        const userData = await instagram.getUserData(name);
+        const userMapped = InstagramMappers.posts(userData);
+
+        return userMapped;
+    }
+
+    public async getExistingShortcodes(shortcodes: string[]): Promise<Set<string>> {
+        const list = await this.instagramRepository.find({
+            where: { shortcode: In(shortcodes) },
+        });
+        return new Set(list.map(l => l.shortcode));
+    }
+
+    public async getPosts(): Promise<InstagramEntity[]> {
+        const list = await this.instagramRepository.find({
+            relations: ['photo'],
+            order: { createdAt: 'DESC' },
+            take: 4,
+        });
+        return list;
+    }
+
+    public async savePost(fields: InstagramFields): Promise<void> {
+        const imageContent = await this.imagesService.download(fields.photoURL);
+        const imageWebP = await this.imagesService.convert(imageContent);
+
+        await this.entityManager.transaction(async(entityManager) => {
+            const instagramRepository = entityManager.getRepository(InstagramEntity);
+            const imagesRepository = entityManager.getRepository(ImagesEntity);
+
+            const imageFields = new ImagesEntity();
+            imageFields.content = imageWebP.toString('base64');
+            const imageEntity = await imagesRepository.save(imageFields);
+
+            const instagramEntity = new InstagramEntity();
+            instagramEntity.shortcode = fields.shortcode;
+            instagramEntity.createdAt = fields.createdAt;
+            instagramEntity.photoUUID = imageEntity.uuid;
+
+            await instagramRepository.save(instagramEntity);
+        });
     }
 
 }

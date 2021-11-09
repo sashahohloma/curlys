@@ -63,7 +63,8 @@ module.exports = {
     plugins: [
         new DefinePlugin({
             'process.env': JSON.stringify({
-                ...dotenv.parsed,
+                SERVER_BASE: dotenv.parsed.SERVER_BASE,
+                BUSINESS_INSTAGRAM: dotenv.parsed.BUSINESS_INSTAGRAM,
             }),
         }),
         new WebpackManifestPlugin({

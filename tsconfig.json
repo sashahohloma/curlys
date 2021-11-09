@@ -17,12 +17,18 @@
 
         "noUnusedLocals": true,
         "noUnusedParameters": true,
+        "noImplicitAny": false,
 
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         
         "esModuleInterop": true,
         "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true
-    },
+        "forceConsistentCasingInFileNames": true,
+
+        "typeRoots": [
+            "node_modules/@types",
+            "source/@types"
+        ]
+    }
 }

@@ -6,6 +6,7 @@ import { PostgresqlConfig } from './postgresql.config';
 import { RedisConfig } from './redis.config';
 import { HandlebarsConfig } from './handlebars.config';
 import { BusinessConfig } from './business.config';
+import { InstagramConfig } from './instagram.config';
 
 @Module({
     imports: [
@@ -23,11 +24,14 @@ import { BusinessConfig } from './business.config';
         ServerConfig,
         HandlebarsConfig,
         BusinessConfig,
+        InstagramConfig,
         PostgresqlConfig,
         RedisConfig,
     ],
     exports: [
         ServerConfig,
+        BusinessConfig,
+        InstagramConfig,
         PostgresqlConfig,
         RedisConfig,
     ],

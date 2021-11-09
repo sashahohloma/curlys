@@ -6,11 +6,8 @@ export class ImagesEntity {
     @PrimaryGeneratedColumn('uuid')
     public uuid: string;
 
-    @Column({ type: 'text' })
-    public original: string;
-
-    @Column({ type: 'text' })
-    public thumbnail: string;
+    @Column({ type: 'text', comment: 'image/webp' })
+    public content: string;
 
     @CreateDateColumn({ name: 'created_at' })
     public createdAt: string;

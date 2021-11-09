@@ -1,22 +1,24 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '../../config/config.module';
-import { RedisModule } from '@sashahohloma/nestjs/modules/redis';
-import { RedisConfig } from '../../config/redis.config';
+import { ImagesModule } from '../images/images.module';
 import { InstagramController } from './instagram.controller';
 import { InstagramService } from './instagram.service';
+import { InstagramQueue } from './instagram.queue';
 
 @Module({
     imports: [
-        RedisModule.forRootAsync({
-            imports: [ConfigModule],
-            useExisting: RedisConfig,
-        }),
+        ConfigModule,
+        ImagesModule,
     ],
     providers: [
         InstagramService,
+        InstagramQueue,
     ],
     controllers: [
         InstagramController,
+    ],
+    exports: [
+        InstagramService,
     ],
 })
 export class InstagramModule {}
