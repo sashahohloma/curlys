@@ -1,4 +1,6 @@
 .main {
+    position: relative;
+    overflow: hidden;
     padding-top: 180px;
     padding-bottom: 210px;
 
@@ -10,6 +12,7 @@
         @include container;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
+        
         align-items: center;
     }
 
