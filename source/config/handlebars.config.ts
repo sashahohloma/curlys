@@ -9,15 +9,13 @@ import { InstagramConfig } from './instagram.config';
 @Injectable()
 export class HandlebarsConfig {
 
-    private readonly _instagramURL: string;
+    private readonly serverConfig: ServerConfig;
+    private readonly businessConfig: BusinessConfig;
+    private readonly instagramConfig: InstagramConfig;
 
     private readonly _layouts: string;
     private readonly _partials: string;
     private readonly _pages: string;
-
-    private readonly _phone: string
-    private readonly _serverURL: string;
-    private readonly _manifest: string;
 
     private readonly _title: string;
     private readonly _description: string;
@@ -27,27 +25,26 @@ export class HandlebarsConfig {
         businessConfig: BusinessConfig,
         instagramConfig: InstagramConfig,
     ) {
+
         this._layouts = serverConfig.resolveTemplates('layouts');
         this._partials = serverConfig.resolveTemplates('partials');
         this._pages = serverConfig.resolveTemplates('pages');
 
-        this._instagramURL = instagramConfig.baseURL;
-
-        this._phone = businessConfig.phone;
-        this._serverURL = serverConfig.base;
-        this._manifest = serverConfig.manifest;
+        this.serverConfig = serverConfig;
+        this.businessConfig = businessConfig;
+        this.instagramConfig = instagramConfig;
 
         this._title = 'Кудряшкин - Закажи трайфл десерт онлайн!';
         this._description = 'Купить свежие трайлф-десерты в Пятигорске с доставкой';
     }
 
     private getManifestFile(filepath: string): string {
-        const file = fs.readFileSync(this._manifest).toString();
+        const file = fs.readFileSync(this.serverConfig.manifest).toString();
         const manifest = jsonParse<Record<string, string>>(file);
 
         const value = stringOr(manifest[filepath], null);
         if (value === null) {
-            throw new InternalServerErrorException(`Ошибка чтения настроек файла ${this._manifest}`);
+            throw new InternalServerErrorException(`Ошибка чтения настроек файла ${this.serverConfig.manifest}`);
         }
 
         return value;
@@ -65,16 +62,12 @@ export class HandlebarsConfig {
         return count <= rating;
     }
 
-    private imageLink(imageUUID: string): string {
-        return this._serverURL + '/image/' + imageUUID;
-    }
-
     private productLink(slug: string): string {
-        return this._serverURL + '/product/' + slug;
+        return this.serverConfig.base + '/product/' + slug;
     }
 
     private waLink(message: string): string {
-        const phone = this._phone.replace(/\D+/g, '');
+        const phone = this.businessConfig.phone.replace(/\D+/g, '');
         const text = encodeURIComponent(message);
         return 'https://wa.me/' + phone + '?text=' + text;
     }
@@ -87,11 +80,11 @@ export class HandlebarsConfig {
     }
 
     private instagramProfileLink(username: string): string {
-        return this._instagramURL + '/' + username;
+        return this.instagramConfig.baseURL + '/' + username;
     }
 
     private instagramPostLink(shortcode: string): string {
-        return this._instagramURL + '/p/' + shortcode;
+        return this.instagramConfig.baseURL + '/p/' + shortcode;
     }
 
 
@@ -100,13 +93,13 @@ export class HandlebarsConfig {
             manifest: (filePath: string): string => this.getManifestFile(filePath),
             times: (n: number, block: HelperOptions): string => this.getTimes(n, block),
             isStarActive: (count: number, rating: number): boolean => this.isStarActive(count, rating),
-            imageLink: (imageUUID: string): string => this.imageLink(imageUUID),
+            imageLink: (imageUUID: string): string => this.serverConfig.imageURL(imageUUID),
             productLink: (slug: string): string => this.productLink(slug),
             waLink: (message: string): string => this.waLink(message),
             orderLink: (name: string, quantity: number): string => this.orderLink(name, quantity),
             instagramProfileLink: (username: string): string => this.instagramProfileLink(username),
             instagramPostLink: (shortcode: string): string => this.instagramPostLink(shortcode),
-            url: () => this._serverURL,
+            url: () => this.serverConfig.base,
             pageTitle: () => this._title,
             description: () => this._description,
         };

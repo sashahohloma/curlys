@@ -80,7 +80,7 @@
 
     &__information {
         display: grid;
-        justify-content: start;
+        justify-items: start;
         row-gap: 24px;
     }
 
@@ -99,11 +99,6 @@
     }
 
     &__details {
-        display: flex;
-        justify-content: start;
-    }
-
-    &__link {
         @include button($color-red);
     }
 }

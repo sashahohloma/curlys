@@ -1,0 +1,37 @@
+<div class="reviews">
+    <div class="reviews__title">
+        Отзывы покупателей
+    </div>
+    <div class="reviews__list">
+        {{#each reviews as |review| }}
+            <div class="reviews__item">
+                <img
+                    class="reviews__image"
+                    src="{{ imageLink review.photoUUID }}"
+                    alt="{{ review.name }}"
+                />
+                <div class="reviews__person">
+                    <h4 class="reviews__name">
+                        {{ review.name }}
+                    </h4>
+                    <div class="reviews__rating">
+                        {{> rating rating=review.rating }}
+                    </div>
+                </div>
+                <p class="reviews__text">
+                    {{ review.text }}
+                </p>
+                <a class="reviews__link" href="{{ productLink dessert.slug }}">
+                    <img
+                        class="reviews__dessert"
+                        src="{{ imageLink review.dessert.images.[0].uuid }}"
+                        alt="{{ review.dessert.name }}"
+                    />
+                </a>
+                <a class="reviews__details" href="{{ productLink dessert.slug }}">
+                    Подробнее
+                </a>
+            </div>
+        {{/each}}
+    </div>
+</div>

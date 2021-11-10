@@ -1,18 +1,25 @@
+import { promises as fs } from 'fs';
 import { Buffer } from 'buffer';
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { EntityManager, Repository } from 'typeorm';
+import { EntityManager } from 'typeorm';
 import { default as got } from 'got';
 import { default as sharp } from 'sharp';
+import { ServerConfig } from '../../config/server.config';
 import { ImagesEntity } from '../../database/entities/images.entity';
 import { Limits } from '../../constants/limits.constants';
 
 @Injectable()
 export class ImagesService {
 
-    private readonly imagesRepository: Repository<ImagesEntity>;
+    private readonly entityManager: EntityManager;
+    private readonly serverConfig: ServerConfig;
 
-    constructor(entityManager: EntityManager) {
-        this.imagesRepository = entityManager.getRepository(ImagesEntity);
+    constructor(
+        entityManager: EntityManager,
+        serverConfig: ServerConfig,
+    ) {
+        this.entityManager = entityManager;
+        this.serverConfig = serverConfig;
     }
 
     public async download(url: string): Promise<Buffer> {
@@ -23,27 +30,33 @@ export class ImagesService {
         return response.body;
     }
 
-    public async convert(image: Buffer): Promise<Buffer> {
-        const webp = await sharp(image).resize(Limits.twoHundred).webp().toBuffer();
-        return webp;
+    public convert(image: Buffer): Promise<Buffer> {
+        return sharp(image).resize(Limits.twoHundred).webp().toBuffer();
     }
 
-    public async save(content: Buffer): Promise<ImagesEntity> {
-        const entity = new ImagesEntity();
-        entity.content = content.toString('base64');
+    public save(content: Buffer): Promise<ImagesEntity> {
+        return this.entityManager.transaction(async(entityManager) => {
+            const imageEntity = new ImagesEntity();
+            const image = await entityManager.save<ImagesEntity>(imageEntity);
 
-        const image = await this.imagesRepository.save(entity);
-        return image;
+            const filePath = this.serverConfig.imagePath(image.uuid);
+            await fs.mkdir(this.serverConfig.imageFolder, { recursive: true });
+
+            await fs.writeFile(filePath, content);
+            return image;
+        });
     }
 
     public async get(uuid: string): Promise<Buffer> {
-        const image = await this.imagesRepository.findOne({
-            where: { uuid },
-        });
-        if (image === undefined) {
+        try {
+
+            const filePath = this.serverConfig.imagePath(uuid);
+            const buffer = await fs.readFile(filePath);
+            return buffer;
+
+        } catch (error) {
             throw new NotFoundException();
         }
-        return Buffer.from(image.content, 'base64');
     }
 
 }

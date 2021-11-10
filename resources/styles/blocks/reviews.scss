@@ -1,0 +1,85 @@
+.reviews {
+    @include container();
+
+    display: grid;
+    grid-template-columns: 100%;
+    row-gap: 30px;
+
+    padding-top: 60px;
+    padding-bottom: 60px;
+
+    &__title {
+        display: block;
+        margin: 0;
+
+        @include fontTitle();
+        font-size: 3em;
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        column-gap: 20px;
+    }
+
+    &__item {
+        display: grid;
+        grid-template-columns: 100%;
+        justify-items: center;
+        row-gap: 20px;
+        padding: 30px 20px;
+        background-color: $color-gray;
+        border-radius: $border-radius;
+    }
+
+    &__image {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 50%;
+    }
+
+    &__person {
+        display: grid;
+        grid-template-columns: 100%;
+        justify-items: center;
+        row-gap: 8px;
+    }
+
+    &__name {
+        display: block;
+        margin: 0;
+
+        @include fontText();
+        font-size: 1.2em;
+        font-weight: 700;
+    }
+
+    &__rating {
+        transform: scale(0.8);
+    }
+
+    &__text {
+        display: block;
+        margin: 0;
+
+        @include fontText();
+        text-align: center;
+    }
+
+    &__link {
+        display: flex;
+    }
+
+    &__dessert {
+        width: 130px;
+        height: 190px;
+        object-fit: contain;
+        object-position: center;
+    }
+
+    &__details {
+        @include button($color-red);
+    }
+}

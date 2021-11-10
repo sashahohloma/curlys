@@ -11,17 +11,14 @@ const startAnimation = (element: Element, selector: string, classname: string): 
 };
 
 const slidesAnimation = (swiper: Swiper) => {
-    swiper.slides.forEach((element: Element) => {
-        startAnimation(element, '.main__image', 'bounce__image');
-        startAnimation(element, '.main__oval_orange', 'bounce__orange');
-        startAnimation(element, '.main__oval_red', 'bounce__red');
-    });
+    startAnimation(swiper.slides[swiper.activeIndex], '.main__image', 'bounce__image');
+    startAnimation(swiper.slides[swiper.activeIndex], '.main__oval_orange', 'bounce__orange');
+    startAnimation(swiper.slides[swiper.activeIndex], '.main__oval_red', 'bounce__red');
 };
 
 export const slider = new Swiper('.swiper', {
     modules: [
         Autoplay,
-        // Navigation,
     ],
     loop: true,
     allowTouchMove: false,
@@ -29,10 +26,6 @@ export const slider = new Swiper('.swiper', {
     autoplay: {
         delay: 9000,
     },
-    // navigation: {
-    //     nextEl: '.main__next',
-    //     prevEl: '.main__prev',
-    // },
     on: {
         afterInit: slidesAnimation,
         slideChangeTransitionStart: slidesAnimation,

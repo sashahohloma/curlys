@@ -7,19 +7,19 @@
 
         <link rel="preconnect" href="https://fonts.googleapis.com"> 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-        <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Montserrat&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" />
-        <link rel="stylesheet" href="{{ manifest 'main.css' }}" />
+        <link rel="stylesheet" href="{{ manifest 'assets/main.css' }}" />
 
         <title>{{ pageTitle }}</title>
         <meta name="description" content="{{ description }}" />
-        <link rel="icon" type="image/x-icon" href="{{manifest 'images/favicon.png'}}">
+        <link rel="icon" type="image/x-icon" href="{{ manifest 'assets/favicon.png'}}">
 
         <meta property="og:type" content="website" />
         <meta property="og:url" content="{{ url }}" />
         <meta name="og:title" property="og:title" content="{{ pageTitle }}" />
         <meta name="og:description" property="og:description" content="{{ description }}" />
-        <meta name="og:image" property="og:image" content="{{manifest 'images/favicon.png'}}" />
+        <meta name="og:image" property="og:image" content="{{ manifest 'assets/favicon.png'}}" />
 
         <meta name="google" content="notranslate">
     </head>
@@ -27,6 +27,6 @@
         <main>
             {{{ body }}}
         </main>
-        <script src="{{ manifest 'main.js' }}"></script>
+        <script src="{{ manifest 'assets/main.js' }}"></script>
     </body>
 </html>
