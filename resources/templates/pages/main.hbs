@@ -1,7 +1,7 @@
 {{> navbar }}
 
 <main class="main swiper">
-    <div class="main__background" style="background-image: url({{ manifest 'images/background.webp' }});"></div>
+    <div class="main__background" style="background-image: url({{ manifest 'assets/background.webp' }});"></div>
     <div class="main__slider swiper-wrapper">
         {{#each desserts as |dessert| }}
 
@@ -26,11 +26,9 @@
                             {{ dessert.description }} 
                         </p>
                         {{> rating rating=dessert.rating reviews=dessert.reviews.length }}
-                        <div class="main__details">
-                            <a class="main__link" href="{{ productLink dessert.slug }}" title="{{ dessert.name }}">
-                                Подробнее
-                            </a>
-                        </div>
+                        <a class="main__details" href="{{ productLink dessert.slug }}" title="{{ dessert.name }}">
+                            Подробнее
+                        </a>
                     </div>
                 </div>
             </div>
@@ -44,5 +42,7 @@
 {{> catalog id='catalog' title='Каталог десертов' desserts=desserts }}
 
 {{> personal instagram=instagram }}
+
+{{> reviews reviews=reviews }}
 
 {{> information id='information' }}

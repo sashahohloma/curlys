@@ -5,11 +5,12 @@ import { Instagram, InstagramFields } from './instagram.models';
 import { InstagramConfig } from '../../config/instagram.config';
 import { InstagramMappers } from './instagram.mappers';
 import { InstagramEntity } from '../../database/entities/instagram.entity';
-import { ImagesEntity } from '../../database/entities/images.entity';
 import { ImagesService } from '../images/images.service';
 
 @Injectable()
 export class InstagramService {
+
+    private isAuthenticated = false;
 
     private readonly entityManager: EntityManager;
     private readonly instagramRepository: Repository<InstagramEntity>;
@@ -34,7 +35,10 @@ export class InstagramService {
     }
 
     private async authenticate(): Promise<void> {
-        await instagram.authenticate(this.username, this.password);
+        if (!this.isAuthenticated) {
+            await instagram.authenticate(this.username, this.password);
+            this.isAuthenticated = true;
+        }
     }
 
     public async getUser(name: string): Promise<Instagram> {
@@ -67,11 +71,7 @@ export class InstagramService {
 
         await this.entityManager.transaction(async(entityManager) => {
             const instagramRepository = entityManager.getRepository(InstagramEntity);
-            const imagesRepository = entityManager.getRepository(ImagesEntity);
-
-            const imageFields = new ImagesEntity();
-            imageFields.content = imageWebP.toString('base64');
-            const imageEntity = await imagesRepository.save(imageFields);
+            const imageEntity = await this.imagesService.save(imageWebP);
 
             const instagramEntity = new InstagramEntity();
             instagramEntity.shortcode = fields.shortcode;

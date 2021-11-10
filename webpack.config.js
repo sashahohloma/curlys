@@ -8,7 +8,7 @@ const cssToFile = require('mini-css-extract-plugin');
 
 // PATHES
 const path = require('path');
-const publicPath = path.join(__dirname, 'public');
+const publicPath = path.join(__dirname, 'public/assets');
 
 // DOTENV
 const dotenv = require('dotenv').config();
@@ -68,13 +68,13 @@ module.exports = {
             }),
         }),
         new WebpackManifestPlugin({
-            basePath: '',
-            publicPath: '',
+            basePath: 'assets/',
+            publicPath: 'assets/',
         }),
         new CopyPlugin({
             patterns: [{
                 from: 'resources/images',
-                to: 'images/[path][name].[contenthash][ext]',
+                to: '[path][name].[contenthash][ext]',
                 globOptions: {
                     ignore: ['**/.DS_Store'],
                 },
