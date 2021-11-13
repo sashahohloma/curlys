@@ -21,16 +21,18 @@
                 <p class="reviews__text">
                     {{ review.text }}
                 </p>
-                <a class="reviews__link" href="{{ productLink dessert.slug }}">
-                    <img
-                        class="reviews__dessert"
-                        src="{{ imageLink review.dessert.images.[0].uuid }}"
-                        alt="{{ review.dessert.name }}"
-                    />
-                </a>
-                <a class="reviews__details" href="{{ productLink dessert.slug }}">
-                    Подробнее
-                </a>
+                {{#if dessert.dessert }}
+                    <a class="reviews__link" href="{{ productLink dessert.slug }}">
+                        <img
+                            class="reviews__dessert"
+                            src="{{ imageLink review.dessert.images.[0].uuid }}"
+                            alt="{{ review.dessert.name }}"
+                        />
+                    </a>
+                    <a class="reviews__details" href="{{ productLink dessert.slug }}">
+                        Подробнее
+                    </a>
+                {{/if}}
             </div>
         {{/each}}
     </div>
