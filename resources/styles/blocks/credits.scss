@@ -1,0 +1,44 @@
+.credits {
+    @include backgroundGradient();
+
+    &__container {
+        @include container();
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: 100%;
+        justify-items: start;
+        row-gap: 4px;
+    }
+
+    &__text {
+        @include fontText();
+        color: $color-white;
+        font-weight: 600;
+    }
+
+    &__question {
+        @include button(
+            $bgColor: $color-white,
+            $textColor: $color-orange
+        );
+
+        transition-duration: 150ms;
+
+        &:hover {
+            background-color: $color-white;
+            box-shadow: 0 0 10px rgba($color-black, 0.2);
+        }
+    
+        &:active,
+        &_active {
+            background-color: $color-white;
+        }
+    }
+}

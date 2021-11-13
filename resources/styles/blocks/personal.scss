@@ -65,7 +65,7 @@
 
     &__more {
         @include button(
-            $color: $color-red,
+            $bgColor: $color-red,
             $font: 1.1425em,
         );
     }

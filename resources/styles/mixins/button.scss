@@ -1,39 +1,39 @@
-@mixin button($color, $font: 1em) {
+@mixin button($bgColor, $textColor: $color-white, $font: 1em) {
     -webkit-appearance: none;
     
     display: flex;
     
     margin: 0;
     padding: 12px 24px;
-    background-color: $color;
+    background-color: $bgColor;
     border-radius: $border-radius;
     border: 0;
     
     transition-duration: .15s;
     
     @include fontTitle;
-    color: $color-white;
+    color: $textColor;
     font-size: $font;
 
     text-decoration: none;
     cursor: pointer;
 
     &:hover {
-        background-color: darken($color, 15);
+        background-color: darken($bgColor, 10);
     }
 
     &:active,
     &_active {
-        background-color: darken($color, 20);
+        background-color: darken($bgColor, 15);
     }
 
     &:disabled,
     &_disabled {
-        background-color: lighten($color, 20);
+        background-color: lighten($bgColor, 20);
         cursor: default;
 
         &:hover {
-            background-color: lighten($color, 20);
+            background-color: lighten($bgColor, 20);
         }
     }
 }
