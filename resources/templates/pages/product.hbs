@@ -1,0 +1,49 @@
+{{> navbar }}
+
+<main class="main">
+    <div class="main__background" style="background-image: url({{ manifest 'assets/background.webp' }});"></div>
+    <div class="main__container">
+        <div class="main__column">
+            <div class="main__swiper">
+                <div class="swiper-wrapper">
+                    {{#each dessert.images as |image| }}
+                        <div class="main__slide swiper-slide">
+                            {{> collage uuid=image.uuid name=dessert.name }}
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        <div class="main__column">
+            <div class="main__information">
+                <h2 class="main__title">
+                    {{ dessert.name }}
+                </h2>
+                {{> rating rating=dessert.rating reviews=dessert.reviews.length }}
+                <p class="main__description">
+                    {{ dessert.description }} 
+                </p>
+                <div class="main__parameters tooltip">
+                    <span class="main__parameters--icon"></span>
+                    <p class="main__parameters--title">
+                        Пищевая ценность
+                    </p>
+                </div>
+                <a class="main__order" href="{{ orderLink dessert.name dessert.quantity }}" target="_blank">
+                    Заказать
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="main__reviews">
+        {{> reviews reviews=dessert.reviews }}
+    </div>
+</main>
+
+{{> advantages }}
+
+{{> catalog title='Похожие десерты' desserts=related }}
+
+{{> footer instagram=instagram reviews=reviews }}
+
+{{> parameters }}

@@ -3,7 +3,7 @@ import { BusinessConfig } from '../config/business.config';
 import { DessertsService } from '../services/desserts/desserts.service';
 import { InstagramService } from '../services/instagram/instagram.service';
 import { ReviewsService } from '../services/reviews/reviews.service';
-import { IMainPage } from './requests.models';
+import { ICommonPage, IMainPage, IProductPage } from './requests.models';
 
 @Injectable()
 export class RequestsService {
@@ -25,18 +25,38 @@ export class RequestsService {
         this.instagramService = instagramService;
     }
 
-    public async main(): Promise<IMainPage> {
-        const desserts = await this.dessertsService.get();
+    private async common(): Promise<ICommonPage> {
         const posts = await this.instagramService.getPosts();
         const reviews = await this.reviewsService.getList();
 
         return {
-            desserts,
             reviews,
             instagram: {
                 username: this.businessConfig.instagram,
                 posts,
             },
+        };
+    }
+
+    public async main(): Promise<IMainPage> {
+        const desserts = await this.dessertsService.getAll();
+        const common = await this.common();
+
+        return {
+            desserts,
+            ...common,
+        };
+    }
+
+    public async product(slug: string): Promise<IProductPage> {
+        const dessert = await this.dessertsService.findOneBySlugOrFail(slug);
+        const related = await this.dessertsService.getAll();
+        const common = await this.common();
+
+        return {
+            dessert,
+            related,
+            ...common,
         };
     }
 

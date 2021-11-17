@@ -25,6 +25,7 @@ const bootstrap = async() => {
     app.setGlobalPrefix('api', {
         exclude: [
             '/',
+            'product/:slug',
             'image/:image',
         ],
     });

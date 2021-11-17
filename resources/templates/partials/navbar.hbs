@@ -1,26 +1,36 @@
 <nav class="navbar">
     <a class="navbar__homepage" href="/">
-        <img class="navbar__logo" src="{{ manifest 'assets/logo.svg' }}" alt="{{ pageTitle }}"/>
+        <img
+            class="navbar__logo"
+            src="{{ manifest 'assets/logo.svg' }}"
+            alt="{{ pageTitle }}"
+            width="142"
+            heigth="40"
+        />
     </a>
     <ul class="navbar__links">
         <li class="navbar__link">
-            <a class="navbar__anchor smooth" href="#catalog">
+            <a
+                class="navbar__anchor {{ conditionalClass isMainPage 'smooth' }}"
+                href="{{ baseURL '#catalog' isMainPage }}"
+            >
                 Каталог десертов
             </a>
         </li>
         <li class="navbar__link">
-            <a class="navbar__anchor smooth" href="#reviews">
+            <a
+                class="navbar__anchor smooth"
+                href="#reviews"
+            >
                 Отзывы
             </a>
         </li>
         <li class="navbar__link">
-            <a class="navbar__anchor smooth" href="#inforamtion">
+            <a
+                class="navbar__anchor smooth"
+                href="#information"
+            >
                 Доставка и оплата
-            </a>
-        </li>
-        <li class="navbar__link">
-            <a class="navbar__anchor smooth" href="#contacts">
-                Контакты
             </a>
         </li>
     </ul>

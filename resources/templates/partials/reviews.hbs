@@ -1,7 +1,9 @@
-<div class="reviews">
-    <div class="reviews__title">
-        Отзывы покупателей
-    </div>
+<div id="reviews" class="reviews">
+    {{#if title }}
+        <div class="reviews__title">
+            {{ title }}
+        </div>
+    {{/if }}
     <div class="reviews__list">
         {{#each reviews as |review| }}
             <div class="reviews__item">
@@ -21,7 +23,7 @@
                 <p class="reviews__text">
                     {{ review.text }}
                 </p>
-                {{#if dessert.dessert }}
+                {{#if review.dessert }}
                     <a class="reviews__link" href="{{ productLink dessert.slug }}">
                         <img
                             class="reviews__dessert"
