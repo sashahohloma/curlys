@@ -1,7 +1,11 @@
-{{> personal instagram=instagram }}
+<div class="footer">
+    {{> personal instagram=instagram }}
 
-{{> reviews reviews=reviews }}
+    <div class="footer__reviews">
+        {{> reviews title='Отзывы покупателей' reviews=reviews }}
+    </div>
 
-{{> information }}
+    {{> information isMainPage=isMainPage }}
 
-{{> credits }}
+    {{> credits }}
+</div>

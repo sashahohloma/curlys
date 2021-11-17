@@ -1,7 +1,7 @@
 import { default as fs } from 'fs';
 import { HelperDelegate, HelperOptions } from 'handlebars';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { jsonParse, stringOr } from '@sashahohloma/utilities';
+import { booleanParse, jsonParse, stringOr } from '@sashahohloma/utilities';
 import { ServerConfig } from './server.config';
 import { BusinessConfig } from './business.config';
 import { InstagramConfig } from './instagram.config';
@@ -47,7 +47,7 @@ export class HandlebarsConfig {
             throw new InternalServerErrorException(`Ошибка чтения настроек файла ${this.serverConfig.manifest}`);
         }
 
-        return value;
+        return this.serverConfig.base + '/' + value;
     }
 
     private getTimes(n: number, block: HelperOptions): string {
@@ -62,8 +62,26 @@ export class HandlebarsConfig {
         return count <= rating;
     }
 
+    private conditionalClass(condition: boolean, cn: string): string {
+        return condition ? cn : '';
+    }
+
+    /**
+     * @param link hashed anchor
+     * @param isMainPage string value 'true' or undefined
+     * @returns full link or anchor
+     */
+    private baseURL(link: string, isMainPage?: string): string {
+        const isMainPageBoolean = booleanParse(isMainPage);
+        return !isMainPageBoolean ? this.serverConfig.base + '/' + link : link;
+    }
+
     private productLink(slug: string): string {
         return this.serverConfig.base + '/product/' + slug;
+    }
+
+    private imageURL(imageUUID: string): string {
+        return this.serverConfig.base + '/' + this.serverConfig.imageURL(imageUUID);
     }
 
     private waLink(message: string): string {
@@ -92,8 +110,10 @@ export class HandlebarsConfig {
         return {
             manifest: (filePath: string): string => this.getManifestFile(filePath),
             times: (n: number, block: HelperOptions): string => this.getTimes(n, block),
+            conditionalClass: (condition: boolean, cn: string): string => this.conditionalClass(condition, cn),
             isStarActive: (count: number, rating: number): boolean => this.isStarActive(count, rating),
-            imageLink: (imageUUID: string): string => this.serverConfig.imageURL(imageUUID),
+            baseURL: (link: string, isMainPage?: string): string => this.baseURL(link, isMainPage),
+            imageLink: (imageUUID: string): string => this.imageURL(imageUUID),
             productLink: (slug: string): string => this.productLink(slug),
             waLink: (message: string): string => this.waLink(message),
             orderLink: (name: string, quantity: number): string => this.orderLink(name, quantity),

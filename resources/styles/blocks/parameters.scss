@@ -1,0 +1,18 @@
+.parameters {
+    @include fontText();
+    padding: 5px;
+    font-size: 0.8571em;
+
+    &__title {
+        font-size: 1.1428em;
+        margin: 0 0 10px 0;
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 5px;
+        max-width: 400px;
+        width: 100%;
+    }
+}

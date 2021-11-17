@@ -10,10 +10,13 @@
 @import 'blocks/body';
 @import 'blocks/navbar';
 @import 'blocks/main';
+@import 'blocks/collage';
 @import 'blocks/rating';
+@import 'blocks/parameters';
 @import 'blocks/advantages';
 @import 'blocks/catalog';
 @import 'blocks/card';
+@import 'blocks/footer';
 @import 'blocks/personal';
 @import 'blocks/information';
 @import 'blocks/reviews';
@@ -21,3 +24,4 @@
 
 @import 'modules/swiper/main';
 @import 'modules/modal';
+@import 'tippy.js/dist/tippy.css';
