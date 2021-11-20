@@ -28,7 +28,7 @@ export const mainSwiper = new Swiper('.main__swiper', {
     slidesPerView: 1,
     speed: 450,
     autoplay: {
-        delay: 900000,
+        delay: 9000,
     },
     on: {
         afterInit: slidesAnimation,

@@ -1,3 +1,32 @@
+@include responsive($max: $breakpoint-sm) {
+    .credits {
+        &__container {
+            flex-direction: column;
+        }
+
+        &__list {
+            margin-bottom: 20px;
+            justify-items: center;
+        }
+    }  
+}
+
+
+
+@include responsive($min: $breakpoint-sm) {
+    .credits {
+        &__container {
+            flex-direction: row;
+        }
+
+        &__list {
+            justify-items: start;
+        }
+    }  
+}
+
+
+
 .credits {
     @include backgroundGradient();
 
@@ -13,7 +42,6 @@
     &__list {
         display: grid;
         grid-template-columns: 100%;
-        justify-items: start;
         row-gap: 4px;
     }
 

@@ -1,21 +1,110 @@
+@use "sass:math";
+
+@include responsive($max: $breakpoint-sm) {
+    .main {
+        padding-top: 60px;
+        padding-bottom: 60px;
+
+        &__container {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        &__column {
+            width: 100%;
+
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        &__information {
+            justify-items: center;
+            margin-top: 20px;
+        }
+
+        &__title {
+            font-size: 2em;
+            text-align: center;
+        }
+
+        &__description {
+            font-size: 1em;
+            text-align: center;
+        }
+    }
+}
+
+
+
+@include responsive($min: $breakpoint-sm) {
+    .main {
+        padding-top: 90px;
+        padding-bottom: 60px;
+
+        &__container {
+            padding-left: math.div(30px, 2);
+            padding-right: math.div(30px, 2);
+        }
+
+        &__column {
+            width: 50%;
+
+            padding-left: math.div(30px, 2);
+            padding-right: math.div(30px, 2);
+        }
+
+        &__information {
+            justify-items: start;
+        }
+    }
+}
+
+
+
+@include responsive($min: $breakpoint-md, $max: $breakpoint-lg) {
+    .main {
+        &__title {
+            font-size: 2.66em;
+        }
+
+        &__description {
+            font-size: 1.2857em;
+        }
+    }
+}
+
+
+
+@include responsive($min: $breakpoint-lg) {
+    .main {
+        padding-top: 120px;
+        padding-bottom: 210px;
+
+        &__title {
+            font-size: 3em;
+        }
+
+        &__description {
+            font-size: 1.4285em;
+        }
+    }
+}
+
+
+
 .main {
     position: relative;
     overflow: hidden;
-    padding-top: 180px;
-    padding-bottom: 210px;
 
     &__background {
         @include backgroundBlurred;
     }
 
     &__container {
-        @include container;
+        @include container($addPadding: false);
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
-    }
-
-    &__column {
-        width: 50%;
     }
 
     &__link {
@@ -31,7 +120,6 @@
 
     &__information {
         display: grid;
-        justify-items: start;
         row-gap: 24px;
         position: relative;
         z-index: 100;
@@ -49,7 +137,6 @@
         @include fontTitle;
         display: flex;
         margin: 0;
-        font-size: 3em;
     }
 
     &__parameters {
@@ -89,7 +176,6 @@
         @include fontText;
         display: block;
         margin: 0;
-        font-size: 1.4285em;
     }
 
     &__details {

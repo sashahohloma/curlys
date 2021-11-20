@@ -1,3 +1,58 @@
+@include responsive($max: $breakpoint-sm) {
+    .catalog {
+        &__list {
+            grid-template-columns: 100%;
+        }
+
+        &__title {
+            text-align: center;
+            line-height: 1.5;
+        }
+    }    
+}
+
+
+
+@include responsive($min: $breakpoint-sm) {
+    .catalog {
+        &__title {
+            line-height: 1;
+        }
+    }    
+}
+
+
+
+@include responsive($min: $breakpoint-sm, $max: $breakpoint-md) {
+    .catalog {
+        &__list {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }    
+}
+
+
+
+@include responsive($min: $breakpoint-md, $max: $breakpoint-xl) {
+    .catalog {
+        &__list {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }    
+}
+
+
+
+@include responsive($min: $breakpoint-xl) {
+    .catalog {
+        &__list {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }    
+}
+
+
+
 .catalog {
     @include container;
     padding-top: 60px;
@@ -9,12 +64,10 @@
         margin: 0;
         margin-bottom: 60px;
         font-size: 3em;
-        line-height: 1;
     }
 
     &__list {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        column-gap: 30px;
+        gap: 30px;
     }
 }

@@ -12,6 +12,7 @@
     &__image {
         position: relative;
         z-index: 10;
+        margin-bottom: 40px;
     }
 
     &__img {
@@ -21,48 +22,22 @@
         height: 100%;
         object-fit: contain;
         transform: rotate(-10deg);
-        margin-bottom: 40px;
     }
 
     &__oval {
-        width: 382px;
+        max-width: 382px;
+        width: 100%;
         height: 284px;
         position: absolute;
         bottom: 0px;
-        margin-bottom: 40px;
-
-        &::before {
-            content: "";
-            display: block;
-            border-width: 7px;
-            border-color: $color-white;
-            border-style: solid;
-        }
 
         &_orange {
             z-index: 5;
-
-            &::before {
-                transform: rotate(20deg);
-
-                @include oval(
-                    $width: 382px,
-                    $height: 284px,
-                    $color: $color-orange
-                );
-            }
+            bottom: 30px;
         }
 
         &_red {
-            &::before {
-                transform: rotate(-10deg) translateY(30px) scale(0.96);
-
-                @include oval(
-                    $width: 382px,
-                    $height: 284px,
-                    $color: $color-red
-                );
-            }
+            width: 90%;
         }
     }
 }

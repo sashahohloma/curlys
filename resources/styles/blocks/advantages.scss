@@ -1,3 +1,37 @@
+@include responsive($max: $breakpoint-md) {
+    .advantages {
+        &__container {
+            grid-template-columns: 100%;
+        }
+
+        &__text {
+            text-align: center;
+        }
+    }    
+}
+
+
+
+@include responsive($min: $breakpoint-md, $max: $breakpoint-xl) {
+    .advantages {
+        &__container {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }    
+}
+
+
+
+@include responsive($min: $breakpoint-xl) {
+    .advantages {
+        &__container {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }    
+}
+
+
+
 .advantages {
     padding-top: 60px;
     padding-bottom: 60px;
@@ -8,13 +42,10 @@
         @include container;
 
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        column-gap: 30px;
+        gap: 30px;
     }
 
     &__text {
-        padding-left: 20px;
-
         @include fontTitle;
         font-size: 1.4285em;
         line-height: 1.8em;

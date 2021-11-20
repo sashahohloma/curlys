@@ -1,3 +1,47 @@
+@include responsive($max: $breakpoint-lg) {
+    .information {
+
+        &__container {
+            grid-template-columns: 100%;
+            align-items: start;
+        }
+
+        &__description {
+            justify-items: center;
+        }
+
+        &__title {
+            text-align: center;
+        }
+
+        &__text {
+            text-align: center;
+        }
+    }
+}
+
+
+
+@include responsive($min: $breakpoint-lg) {
+    .information {
+
+        &__container {
+            grid-template-columns: repeat(2, 1fr);
+            align-items: end;
+        }
+
+        &__description {
+            justify-items: start;
+        }
+
+        &__image {
+            height: 100%;
+        }
+    }
+}
+
+
+
 .information {
     position: relative;
     overflow: hidden;
@@ -9,16 +53,13 @@
     &__container {
         @include container;
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
         column-gap: 30px;
-        align-items: end;
     }
 
     &__description {
         align-self: center;
         display: grid;
         grid-template-columns: 100%;
-        justify-items: start;
         row-gap: 30px;
         padding-top: 60px;
         padding-bottom: 60px;
@@ -48,7 +89,6 @@
         max-width: 640px;
         max-height: 580px;
         width: 100%;
-        height: 100%;
         object-fit: contain;
         object-position: bottom;
     }
