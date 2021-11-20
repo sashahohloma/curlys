@@ -1,7 +1,8 @@
 @use "sass:math";
 
 @mixin oval($width, $height, $color) {
-    width: $width;
+    max-width: $width;
+    width: 100%;
     height: $height;
     background: $color;
     border-radius: #{math.div($width, 2)} / #{math.div($height, 2)};

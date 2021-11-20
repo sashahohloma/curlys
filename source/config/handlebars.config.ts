@@ -44,7 +44,7 @@ export class HandlebarsConfig {
 
         const value = stringOr(manifest[filepath], null);
         if (value === null) {
-            throw new InternalServerErrorException(`Ошибка чтения настроек файла ${this.serverConfig.manifest}`);
+            throw new InternalServerErrorException(`Cannot read file "${filepath}" from manifest`);
         }
 
         return this.serverConfig.base + '/' + value;
@@ -102,7 +102,7 @@ export class HandlebarsConfig {
     }
 
     private instagramPostLink(shortcode: string): string {
-        return this.instagramConfig.baseURL + '/p/' + shortcode;
+        return this.instagramConfig.baseURL + '/p/' + shortcode + '/';
     }
 
 

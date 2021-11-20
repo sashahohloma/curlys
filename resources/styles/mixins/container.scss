@@ -1,4 +1,9 @@
-@mixin container($width: 1280px) {
+@mixin container($width: 1280px, $addPadding: true) {
     max-width: $width;
     margin: 0 auto;
+
+    @if $addPadding == true {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
 }

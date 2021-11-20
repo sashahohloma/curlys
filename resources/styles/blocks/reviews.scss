@@ -1,3 +1,61 @@
+@include responsive($max: $breakpoint-sm) {
+    .reviews {
+
+        &__list {
+            grid-template-columns: 100%;
+        }
+
+        &__title {
+            font-size: 2.4em;
+            text-align: center;
+        }
+    }    
+}
+
+
+
+@include responsive($min: $breakpoint-sm) {
+    .reviews {
+        &__title {
+            font-size: 3em;
+        }
+    }  
+}
+
+
+
+@include responsive($min: $breakpoint-sm, $max: $breakpoint-md) {
+    .reviews {
+        &__list {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }    
+}
+
+
+
+@include responsive($min: $breakpoint-md, $max: $breakpoint-xl) {
+    .reviews {
+
+        &__list {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }    
+}
+
+
+
+@include responsive($min: $breakpoint-xl) {
+    .reviews {
+
+        &__list {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }    
+}
+
+
+
 .reviews {
     @include container();
 
@@ -10,13 +68,11 @@
         margin: 0;
 
         @include fontTitle();
-        font-size: 3em;
     }
 
     &__list {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        column-gap: 20px;
+        gap: 20px;
     }
 
     &__item {

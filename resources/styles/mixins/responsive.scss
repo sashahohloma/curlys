@@ -7,13 +7,13 @@
     }
 
     @if $min == none and $max != none {
-        @media (max-width: $max - 1) {
+        @media (max-width: decrement($max)) {
             @content;
         }
     }
 
     @if $min != none and $max != none {
-        @media (min-width: $min) and (max-width: $max - 1) {
+        @media (min-width: $min) and (max-width: decrement($max)) {
             @content;
         }
     }
