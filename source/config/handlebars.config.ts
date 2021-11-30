@@ -98,7 +98,7 @@ export class HandlebarsConfig {
     }
 
     private instagramProfileLink(username: string): string {
-        return this.instagramConfig.baseURL + '/' + username;
+        return this.instagramConfig.baseURL + '/' + username + '/';
     }
 
     private instagramPostLink(shortcode: string): string {
