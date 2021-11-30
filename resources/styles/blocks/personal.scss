@@ -5,8 +5,8 @@
             grid-template-columns: 100%;
         }
 
-        &__image {
-            max-width: 240px;
+        &__animation {
+            height: 380px;
             order: 12;
         }
 
@@ -48,8 +48,8 @@
             grid-template-columns: repeat(2, 1fr);
         }
 
-        &__image {
-            max-width: 306px;
+        &__animation {
+            height: 600px;
         }
 
         &__information {
@@ -67,6 +67,10 @@
 
 @include responsive($min: $breakpoint-lg) {
     .personal {
+        &__information {
+            padding-top: 110px;
+            padding-bottom: 110px;
+        }
 
         &__thumb {
             width: 100px;
@@ -91,12 +95,31 @@
         align-items: center;
     }
 
+    &__animation {
+        display: flex;
+        justify-content: center;
+        position: relative;
+    }
+
+    &__slide {
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        bottom: 0;
+        opacity: 0;
+        transition-duration: 500ms;
+
+        &_visible {
+            opacity: 1;
+        }
+    }
+
     &__image {
         width: 100%;
+        height: 100%;
         object-fit: contain;
         object-position: bottom center;
         justify-self: center;
-        margin-top: 60px;
     }
 
     &__information {
@@ -143,4 +166,9 @@
         );
     }
 
+}
+
+@keyframes fader {
+    from { opacity: 1.0; }
+    to   { opacity: 0.0; }
 }

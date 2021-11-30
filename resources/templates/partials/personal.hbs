@@ -1,7 +1,17 @@
 <div class="personal">
     <div class="personal__background" style="background-image: url({{ manifest 'assets/background.webp' }});"></div>
     <div class="personal__container">
-        <img class="personal__image" src="{{ manifest 'assets/personal.webp' }}" alt="Кондитер Виктория Смирнова" />
+        <div class="personal__animation">
+            <div class="personal__slide personal__slide_visible">
+                <img class="personal__image" src="{{ manifest 'assets/portraits/portrait1.webp' }}" alt="Кондитер Виктория Смирнова" />
+            </div>
+            <div class="personal__slide">
+                <img class="personal__image" src="{{ manifest 'assets/portraits/portrait2.webp' }}" alt="Кондитер Виктория Смирнова" />
+            </div>
+            <div class="personal__slide">
+                <img class="personal__image" src="{{ manifest 'assets/portraits/portrait3.webp' }}" alt="Кондитер Виктория Смирнова" />
+            </div>
+        </div>
         <div class="personal__information">
             <h2 class="personal__title">
                 Виктория Смирнова
