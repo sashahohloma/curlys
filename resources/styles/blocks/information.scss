@@ -8,6 +8,8 @@
 
         &__description {
             justify-items: center;
+            padding-top: 60px;
+            padding-bottom: 60px;
         }
 
         &__title {
@@ -32,6 +34,8 @@
 
         &__description {
             justify-items: start;
+            padding-top: 90px;
+            padding-bottom: 90px;
         }
 
         &__image {
@@ -61,8 +65,6 @@
         display: grid;
         grid-template-columns: 100%;
         row-gap: 30px;
-        padding-top: 60px;
-        padding-bottom: 60px;
     }
 
     &__title {

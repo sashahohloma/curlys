@@ -1,3 +1,5 @@
 {
-    "migrations": "npm run typeorm migration:generate -- -n create-tables"
+    "migrations:create": "npm run typeorm migration:generate -- -n create-tables",
+    "migrations:run": "npm run typeorm migration:run",
+    "migrations:revert": "npm run typeorm migration:revert"
 }

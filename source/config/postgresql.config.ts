@@ -7,6 +7,7 @@ import { DessertsEntity } from '../database/entities/desserts.entity';
 import { ImagesEntity } from '../database/entities/images.entity';
 import { InstagramEntity } from '../database/entities/instagram.entity';
 import { ReviewsEntity } from '../database/entities/reviews.entity';
+import { RatingEntity } from '../database/entities/rating.entity';
 
 @Injectable()
 export class PostgresqlConfig implements TypeOrmOptionsFactory {
@@ -50,6 +51,7 @@ export class PostgresqlConfig implements TypeOrmOptionsFactory {
                 ImagesEntity,
                 InstagramEntity,
                 ReviewsEntity,
+                RatingEntity,
             ],
             synchronize: true,
             useUTC: true,

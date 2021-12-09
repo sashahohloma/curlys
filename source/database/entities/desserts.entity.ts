@@ -1,12 +1,17 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, Check, CreateDateColumn, JoinColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, Check, CreateDateColumn, JoinColumn, OneToMany, OneToOne } from 'typeorm';
+import { DessertsQuantity } from '../../services/desserts/desserts.models';
+import { transformDecimal } from '../../shared/transformers/transformDecimal';
 import { ImagesEntity } from './images.entity';
+import { RatingEntity } from './rating.entity';
 import { ReviewsEntity } from './reviews.entity';
 
 @Entity({ schema: 'curlys', name: 'desserts' })
-@Check('protein > 0')
-@Check('fats > 0')
-@Check('carbohydrates > 0')
+@Check('protein > 0 AND protein < 100')
+@Check('fats > 0 AND fats < 100')
+@Check('carbohydrates > 0 AND carbohydrates < 100')
 @Check('calories > 0')
+@Check('daily > 0 AND daily < 100')
+@Check('weight > 0')
 @Check('quantity = 2 OR quantity = 4 OR quantity = 6')
 @Check('price > 0')
 export class DessertsEntity {
@@ -21,30 +26,45 @@ export class DessertsEntity {
     public name: string;
 
     @Column({ type: 'text' })
-    public description: string;
+    public short_description: string;
 
-    @Column({ type: 'int4', comment: 'белки' })
+    @Column({ type: 'text' })
+    public full_description: string;
+
+    @Column({ type: 'decimal', precision: 10, scale: 2, transformer: transformDecimal })
     public protein: number;
 
-    @Column({ type: 'int4', comment: 'жиры' })
+    @Column({ type: 'decimal', precision: 10, scale: 2, transformer: transformDecimal })
     public fats: number;
 
-    @Column({ type: 'int4', comment: 'углеводы' })
+    @Column({ type: 'decimal', precision: 10, scale: 2, transformer: transformDecimal })
     public carbohydrates: number;
 
-    @Column({ type: 'int4', comment: 'калорийность' })
+    @Column({ type: 'decimal', precision: 10, scale: 2, transformer: transformDecimal })
     public calories: number;
 
+    @Column({ type: 'decimal', precision: 10, scale: 2, transformer: transformDecimal })
+    public daily: number;
+
+    @Column({ type: 'int4' })
+    public weight: number;
+
+    @Column({ type: 'text' })
+    public storing: string;
+
     @Column({ type: 'int2' })
-    public quantity: number;
+    public quantity: DessertsQuantity;
 
     @Column({ type: 'int4' })
     public price: number;
 
+    @Column({ type: 'boolean', name: 'is_public', default: true })
+    public isPublic: boolean;
+
     @CreateDateColumn({ name: 'created_at' })
     public createdAt: string;
 
-    @ManyToMany(() => ImagesEntity)
+    @ManyToMany(() => ImagesEntity, { cascade: true })
     @JoinTable({
         schema: 'curlys',
         name: 'desserts_images',
@@ -55,10 +75,13 @@ export class DessertsEntity {
             name: 'image_uuid',
         },
     })
-    readonly images: ImagesEntity[];
+    public images: ImagesEntity[];
 
     @OneToMany(() => ReviewsEntity, (reviews) => reviews.dessert)
     @JoinColumn({ name: 'uuid', referencedColumnName: 'dessert_uuid' })
-    readonly reviews: ReviewsEntity[];
+    public reviews: ReviewsEntity[];
+
+    @OneToOne(() => RatingEntity, (rating) => rating.dessert, { nullable: true })
+    public rating?: RatingEntity;
 
 }

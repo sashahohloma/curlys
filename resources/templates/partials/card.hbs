@@ -6,14 +6,17 @@
             alt="{{ dessert.name }}"
         />
     </a>
+    <div class="card__quantity">
+        {{> quantity value=dessert.quantity }}
+    </div>
     <a class="card__title" href="{{ productLink dessert.slug }}">
         {{ dessert.name }}
     </a>
     <div class="card__rating">
-        {{> rating rating=dessert.rating reviews=dessert.reviews.length }}
+        {{> rating rating=dessert.rating.value reviews=dessert.reviews.length }}
     </div>
     <p class="card__description">
-        {{ dessert.description }}
+        {{ dessert.short_description }}
     </p>
     <div class="card__price">
         {{ dessert.price }} ₽

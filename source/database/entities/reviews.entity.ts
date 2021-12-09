@@ -12,12 +12,6 @@ export class ReviewsEntity {
     @Column({ type: 'varchar', length: 100 })
     public name: string;
 
-    @Column({ type: 'uuid', name: 'photo_uuid', nullable: true })
-    public photoUUID?: string;
-
-    @Column({ type: 'uuid', name: 'dessert_uuid' })
-    public dessertUUID: string;
-
     @Column({ type: 'int2' })
     public rating: number;
 
@@ -27,9 +21,9 @@ export class ReviewsEntity {
     @CreateDateColumn({ name: 'created_at' })
     public createdAt: string;
 
-    @OneToOne(() => ImagesEntity)
-    @JoinColumn({ name: 'photo_uuid' })
-    readonly photo: ImagesEntity | null;
+    @OneToOne(() => ImagesEntity, { cascade: true, nullable: true })
+    @JoinColumn({ name: 'photo_uuid', referencedColumnName: 'uuid' })
+    readonly photo?: ImagesEntity;
 
     @ManyToOne(() => DessertsEntity, (dessert) => dessert.reviews)
     @JoinColumn({ name: 'dessert_uuid', referencedColumnName: 'uuid' })

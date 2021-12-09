@@ -8,5 +8,4 @@ export class ImagesEntity {
 
     @CreateDateColumn({ name: 'created_at' })
     public createdAt: string;
-
 }

@@ -2,8 +2,10 @@
 
 @include responsive($max: $breakpoint-sm) {
     .main {
-        padding-top: 60px;
-        padding-bottom: 60px;
+        &__padding {
+            padding-top: 60px;
+            padding-bottom: 60px;
+        }
 
         &__container {
             padding-left: 15px;
@@ -38,8 +40,10 @@
 
 @include responsive($min: $breakpoint-sm) {
     .main {
-        padding-top: 90px;
-        padding-bottom: 60px;
+        &__padding {
+            padding-top: 75px;
+            padding-bottom: 90px;
+        }
 
         &__container {
             padding-left: math.div(30px, 2);
@@ -61,7 +65,7 @@
 
 
 
-@include responsive($min: $breakpoint-md, $max: $breakpoint-lg) {
+@include responsive($min: $breakpoint-md) {
     .main {
         &__title {
             font-size: 2.66em;
@@ -69,23 +73,6 @@
 
         &__description {
             font-size: 1.2857em;
-        }
-    }
-}
-
-
-
-@include responsive($min: $breakpoint-lg) {
-    .main {
-        padding-top: 120px;
-        padding-bottom: 210px;
-
-        &__title {
-            font-size: 3em;
-        }
-
-        &__description {
-            font-size: 1.4285em;
         }
     }
 }
@@ -107,7 +94,42 @@
         align-items: center;
     }
 
+    &__gallery {
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+    }
+
+    &__thumbnails {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        &--item {
+            display: flex;
+            width: 120px;
+            height: 90px;
+            transition-duration: 300ms;
+            cursor: pointer;
+
+            &__active {
+                opacity: 0.66;
+                cursor: default;
+            }
+        }
+
+        &--img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+        }
+    }
+
     &__link {
+        position: relative;
         display: block;
         max-width: max-content;
         text-decoration: none;
@@ -125,12 +147,11 @@
         z-index: 100;
     }
 
-    &__slide {
-        opacity: 0;
-
-        &_active {
-            opacity: 1;
-        }
+    &__image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
     }
 
     &__title {
@@ -169,6 +190,7 @@
         
         &--title {
             @include fontTitle();
+            margin: 0;
         }
     }
 
@@ -180,6 +202,20 @@
 
     &__details {
         @include button($color-red);
+    }
+
+    &__quantity {
+        &_absolute {
+            position: absolute;
+            top: 15%;
+            right: 0;
+        }
+    }
+
+    &__price {
+        @include fontTitle;
+        font-size: 3.35em;
+        line-height: 1;
     }
 
     &__order {
