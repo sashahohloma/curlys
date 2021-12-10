@@ -1,4 +1,4 @@
-import { IDesserts } from '../services/desserts/desserts.models';
+import { DessertsEntity } from '../database/entities/desserts.entity';
 import { InstagramEntity } from '../database/entities/instagram.entity';
 
 export interface ICommonPage {
@@ -10,10 +10,10 @@ export interface ICommonPage {
 }
 
 export interface IMainPage extends ICommonPage {
-    desserts: IDesserts[];
+    desserts: DessertsEntity[];
 }
 
 export interface IProductPage extends ICommonPage {
-    dessert: IDesserts;
-    related: IDesserts[];
+    dessert: DessertsEntity;
+    related: DessertsEntity[];
 }

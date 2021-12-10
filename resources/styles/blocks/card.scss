@@ -1,4 +1,5 @@
 .card {
+    position: relative;
     display: grid;
     grid-template-columns: 100%;
     align-items: start;
@@ -14,13 +15,24 @@
     &__image {
         display: flex;
         justify-content: center;
+        transition-duration: 150ms;
+
+        &:hover {
+            transform: scale(1.1);
+        }
     }
 
     &__img {
-        width: 130px;
-        height: 190px;
+        width: 160px;
+        height: 220px;
         object-fit: contain;
         object-position: center;
+    }
+
+    &__quantity {
+        position: absolute;
+        top: 0px;
+        right: 0px;
     }
 
     &__title {
@@ -28,6 +40,10 @@
         color: $color-black;
         font-size: 1.5em;
         text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
 
     &__rating {

@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Not } from 'typeorm';
 import { BusinessConfig } from '../config/business.config';
 import { DessertsService } from '../services/desserts/desserts.service';
 import { InstagramService } from '../services/instagram/instagram.service';
@@ -39,7 +40,7 @@ export class RequestsService {
     }
 
     public async main(): Promise<IMainPage> {
-        const desserts = await this.dessertsService.getAll();
+        const desserts = await this.dessertsService.getList();
         const common = await this.common();
 
         return {
@@ -49,8 +50,13 @@ export class RequestsService {
     }
 
     public async product(slug: string): Promise<IProductPage> {
-        const dessert = await this.dessertsService.findOneBySlugOrFail(slug);
-        const related = await this.dessertsService.getAll();
+        const dessert = await this.dessertsService.findOneOrFail({
+            relations: ['images', 'reviews', 'reviews.photo', 'rating'],
+            where: { slug },
+        });
+        const related = await this.dessertsService.getList({
+            slug: Not(slug),
+        });
         const common = await this.common();
 
         return {

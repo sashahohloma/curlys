@@ -59,6 +59,7 @@ export class InstagramService {
 
     public async getPosts(): Promise<InstagramEntity[]> {
         const list = await this.instagramRepository.find({
+            relations: ['photo'],
             order: { createdAt: 'DESC' },
             take: 4,
         });
@@ -67,7 +68,7 @@ export class InstagramService {
 
     public async savePost(fields: InstagramFields): Promise<void> {
         const imageContent = await this.imagesService.download(fields.photoURL);
-        const imageWebP = await this.imagesService.convert(imageContent);
+        const imageWebP = await this.imagesService.convertToWEBP(imageContent);
 
         await this.entityManager.transaction(async(entityManager) => {
             const instagramRepository = entityManager.getRepository(InstagramEntity);
@@ -76,7 +77,7 @@ export class InstagramService {
             const instagramEntity = new InstagramEntity();
             instagramEntity.shortcode = fields.shortcode;
             instagramEntity.createdAt = fields.createdAt;
-            instagramEntity.photoUUID = imageEntity.uuid;
+            instagramEntity.photo = imageEntity;
 
             await instagramRepository.save(instagramEntity);
         });

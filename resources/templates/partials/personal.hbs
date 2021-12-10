@@ -19,21 +19,23 @@
             <p class="personal__text">
                 Профессиональный домашний кондитер с богатым опытом работы. Каждый десерт готовит с особым трепетом к рецептуре и насыщенным домашним вкусом
             </p>
-            <div class="personal__instagram">
-                {{#each instagram.posts as |post| }}
-                    <a
-                        href="{{ instagramPostLink shortcode }}"
-                        class="personal__post"
-                        target="_blank"
-                    >
-                        <img
-                            class="personal__thumb"
-                            src="{{ imageLink post.photoUUID }}"
-                            alt="{{ post.shortcode }}"
-                        />
-                    </a>
-                {{/each}}
-            </div>
+            {{#if instagram.posts }}
+                <div class="personal__instagram">
+                    {{#each instagram.posts as |post| }}
+                        <a
+                            href="{{ instagramPostLink shortcode }}"
+                            class="personal__post"
+                            target="_blank"
+                        >
+                            <img
+                                class="personal__thumb"
+                                src="{{ imageLink post.photo.uuid }}"
+                                alt="{{ post.shortcode }}"
+                            />
+                        </a>
+                    {{/each}}
+                </div>
+            {{/if }}
             <a
                 href="{{ instagramProfileLink instagram.username }}"
                 class="personal__more"

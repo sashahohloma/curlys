@@ -7,14 +7,11 @@ export class InstagramEntity {
     @PrimaryColumn({ type: 'varchar', length: 100 })
     public shortcode: string;
 
-    @Column({ type: 'uuid', name: 'photo_uuid', nullable: true })
-    public photoUUID: string;
-
     @Column({ name: 'created_at', type: 'timestamp' })
     public createdAt: string;
 
-    @OneToOne(() => ImagesEntity)
-    @JoinColumn({ name: 'photo_uuid' })
-    readonly photo: ImagesEntity;
+    @OneToOne(() => ImagesEntity, { cascade: true, nullable: false })
+    @JoinColumn({ name: 'photo_uuid', referencedColumnName: 'uuid' })
+    public photo: ImagesEntity;
 
 }
