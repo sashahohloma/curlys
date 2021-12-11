@@ -165,7 +165,7 @@
         align-items: center;
         grid-auto-flow: column;
         column-gap: 10px;
-        cursor: pointer;
+        cursor: help;
 
         &--icon {
             display: flex;
@@ -213,9 +213,19 @@
     }
 
     &__price {
+        position: relative;
         @include fontTitle;
         font-size: 3.35em;
         line-height: 1;
+        cursor: help;
+
+        &--info {
+            position: absolute;
+            right: -20px;
+            top: -8px;
+            font-size: 0.7142em;
+            color: $color-red;
+        }
     }
 
     &__order {

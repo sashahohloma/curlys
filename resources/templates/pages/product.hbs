@@ -34,15 +34,16 @@
                 <p class="main__description">
                     {{ dessert.full_description }} 
                 </p>
-                <div class="main__parameters tooltip">
+                <div class="main__parameters tooltip_parameters">
                     <span class="main__parameters--icon"></span>
                     <p class="main__parameters--title">
                         Пищевая ценность
                     </p>
                 </div>
                 {{> quantity value=dessert.quantity }}
-                <div class="main__price">
+                <div class="main__price tooltip_price">
                     {{ dessert.price }} ₽
+                    <span class="main__price--info">*</span>
                 </div>
                 <a class="main__order" href="{{ orderLink dessert.name dessert.quantity }}" target="_blank">
                     Заказать
@@ -61,4 +62,6 @@
 
 {{> footer instagram=instagram reviews=reviews }}
 
-{{> parameters }}
+{{> tooltip_parameters }}
+
+{{> tooltip_price }}
