@@ -14,7 +14,6 @@
 @import 'blocks/quantity';
 @import 'blocks/collage';
 @import 'blocks/rating';
-@import 'blocks/parameters';
 @import 'blocks/advantages';
 @import 'blocks/catalog';
 @import 'blocks/card';
@@ -23,6 +22,8 @@
 @import 'blocks/information';
 @import 'blocks/reviews';
 @import 'blocks/credits';
+@import 'blocks/tooltipParameters';
+@import 'blocks/tooltipPrice';
 
 @import '@splidejs/splide/dist/css/splide.min.css';
 @import 'modules/swiper/main';

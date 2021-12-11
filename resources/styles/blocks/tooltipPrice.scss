@@ -1,0 +1,6 @@
+.tooltipPrice {
+    max-width: 240px;
+    @include fontText();
+    padding: 5px;
+    font-size: 0.8571em;
+}
