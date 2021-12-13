@@ -18,15 +18,18 @@ export class ReviewsEntity {
     @Column({ type: 'text' })
     public text: string;
 
+    @Column({ type: 'boolean', name: 'is_public', default: false })
+    public isPublic: boolean;
+
     @CreateDateColumn({ name: 'created_at' })
     public createdAt: string;
 
     @OneToOne(() => ImagesEntity, { cascade: true, nullable: true })
     @JoinColumn({ name: 'photo_uuid', referencedColumnName: 'uuid' })
-    readonly photo?: ImagesEntity;
+    public photo?: ImagesEntity;
 
     @ManyToOne(() => DessertsEntity, (dessert) => dessert.reviews)
     @JoinColumn({ name: 'dessert_uuid', referencedColumnName: 'uuid' })
-    readonly dessert: DessertsEntity;
+    public dessert: DessertsEntity;
 
 }

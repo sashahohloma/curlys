@@ -1,27 +1,27 @@
-<div class="card">
-    <a class="card__image" href="{{ productLink dessert.slug }}">
+<div class="productCard">
+    <a class="productCard__image" href="{{ productLink dessert.slug }}">
         <img
-            class="card__img"
+            class="productCard__img"
             src="{{ imageLink dessert.images.[0].uuid }}"
             alt="{{ dessert.name }}"
         />
     </a>
-    <div class="card__quantity">
+    <div class="productCard__quantity">
         {{> quantity value=dessert.quantity }}
     </div>
-    <a class="card__title" href="{{ productLink dessert.slug }}">
+    <a class="productCard__title" href="{{ productLink dessert.slug }}">
         {{ dessert.name }}
     </a>
-    <div class="card__rating">
+    <div class="productCard__rating">
         {{> rating rating=dessert.rating.value reviews=dessert.reviews.length }}
     </div>
-    <p class="card__description">
+    <p class="productCard__description">
         {{ dessert.short_description }}
     </p>
-    <div class="card__price">
+    <div class="productCard__price">
         {{ dessert.price }} ₽
     </div>
-    <a class="card__order" href="{{ orderLink dessert.name dessert.quantity }}" target="_blank">
+    <a class="productCard__order" href="{{ orderLink dessert.name dessert.quantity }}" target="_blank">
         Заказать
     </a>
 </div>

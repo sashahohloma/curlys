@@ -1,0 +1,59 @@
+<div class="modal fade reviewFormModal" id="reviewFormModal" tabindex="-1" aria-labelledby="review_formLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form id="review_form" class="reviewFormModal__form">
+                    <input name="slug" type="hidden" value="{{ dessert.slug }}" />
+                    <div class="reviewFormModal__header">
+                        <h3 class="reviewFormModal__title">Добавьте свой отзыв</h3>
+                        <p class="reviewFormModal__description">для десерта "{{ dessert.name }}"</p>
+                        <button type="button" class="btn-close review_close reviewFormModal__closeIcon" aria-label="Close"></button>
+                    </div>
+                    <div class="reviewFormModal__body">
+                        <div class="reviewFormModal__field">
+                            <label for="reviewFormModal__name" class="form-label">Ваше имя</label>
+                            <input id="reviewFormModal__name" name="name" type="text" class="form-control">
+                            <div id="reviewFormModal__name--error" class="invalid-feedback reviewFormModal__invalid"></div>
+                        </div>
+                        <div class="reviewFormModal__field">
+                            <label for="reviewFormModal__photo" class="reviewFormModal__photoField">
+                                <span class="reviewFormModal__photoField--placeholder">
+                                    <img id="photo_preview" class="reviewFormModal__photoField--preview" src="" />
+                                </span>
+                                <span id="photo_text" class="reviewFormModal__photoField--text">Загрузите аватарку</span>
+                                <button id="photo_remove" class="reviewFormModal__photoField--remove" type="button">Удалить</button>
+                                <input id="reviewFormModal__photo" name="photo" type="file" accept="image/*" class="reviewFormModal__photoField--input">
+                            </label>
+                        </div>
+                        <div class="reviewFormModal__field">
+                            <label for="rating1" class="form-label">Ваша оценка</label>
+                            <div class="reviewFormModal__rating">
+                                {{#times 5 }}
+                                    <label for="reviewFormModal__rating{{ this }}" class="reviewFormModal__rating--label">
+                                        {{#if (isStarActive this ../rating) }}
+                                            <img class="rating__img" src="{{ manifest 'assets/star-disabled.svg' }}" />
+                                        {{else if (isStarHalf this ../rating) }}
+                                            <img class="rating__img" src="{{ manifest 'assets/star-half.svg' }}" />
+                                        {{else}}
+                                            <img class="rating__img" src="{{ manifest 'assets/star-active.svg' }}" />
+                                        {{/if}}
+                                        <input checked="{{ isRatingChecked this 5 }}" id="reviewFormModal__rating{{ this }}" type="radio" name="rating" value="{{ this }}" class="reviewFormModal__rating--input">
+                                    </label>
+                                {{/times}}
+                            </div>
+                        </div>
+                        <div class="reviewFormModal__field">
+                            <label for="reviewFormModal__text" class="form-label">Ваш отзыв</label>
+                            <textarea id="reviewFormModal__text" name="text" class="form-control" rows="5"></textarea>
+                            <div id="reviewFormModal__text--error" class="invalid-feedback"></div>
+                        </div>
+                    </div>
+                    <div class="reviewFormModal__footer">
+                        <button type="submit" class="reviewFormModal__submit">Отправить</button>
+                        <button type="button" class="reviewFormModal__close review_close">Закрыть</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

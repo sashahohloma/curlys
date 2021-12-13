@@ -28,10 +28,8 @@ export class RequestsService {
 
     private async common(): Promise<ICommonPage> {
         const posts = await this.instagramService.getPosts();
-        const reviews = await this.reviewsService.getList();
 
         return {
-            reviews,
             instagram: {
                 username: this.businessConfig.instagram,
                 posts,
@@ -41,27 +39,31 @@ export class RequestsService {
 
     public async main(): Promise<IMainPage> {
         const desserts = await this.dessertsService.getList();
+        const reviews = await this.reviewsService.getListWithDessert();
         const common = await this.common();
 
         return {
             desserts,
+            reviews,
             ...common,
         };
     }
 
     public async product(slug: string): Promise<IProductPage> {
         const dessert = await this.dessertsService.findOneOrFail({
-            relations: ['images', 'reviews', 'reviews.photo', 'rating'],
+            relations: ['images', 'rating'],
             where: { slug },
         });
         const related = await this.dessertsService.getList({
             slug: Not(slug),
         });
+        const reviews = await this.reviewsService.getByDessert(dessert);
         const common = await this.common();
 
         return {
             dessert,
             related,
+            reviews,
             ...common,
         };
     }

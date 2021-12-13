@@ -24,8 +24,12 @@
 @import 'blocks/credits';
 @import 'blocks/tooltipParameters';
 @import 'blocks/tooltipPrice';
+@import 'blocks/reviewForm';
 
+@import 'modules/bootstrap/main';
+@import 'modules/splide/main';
 @import '@splidejs/splide/dist/css/splide.min.css';
 @import 'modules/swiper/main';
 @import 'modules/modal';
 @import 'tippy.js/dist/tippy.css';
+@import 'toastify-js/src/toastify.css';

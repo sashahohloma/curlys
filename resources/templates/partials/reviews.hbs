@@ -1,41 +1,61 @@
 <div id="reviews" class="reviews">
-    {{#if title }}
+    <div class="reviews__header">
         <div class="reviews__title">
-            {{ title }} ({{ reviews.length }})
+            Отзывы покупателей ({{ reviews.length }})
         </div>
-    {{/if }}
-    <div class="reviews__list">
-        {{#each reviews as |review| }}
-            <div class="reviews__item">
-                <img
-                    class="reviews__image"
-                    src="{{ imageLink review.photoUUID }}"
-                    alt="{{ review.name }}"
-                />
-                <div class="reviews__person">
-                    <h4 class="reviews__name">
-                        {{ review.name }}
-                    </h4>
-                    <div class="reviews__rating">
-                        {{> rating rating=review.rating }}
-                    </div>
-                </div>
-                <p class="reviews__text">
-                    {{ review.text }}
-                </p>
-                {{#if review.dessert }}
-                    <a class="reviews__link" href="{{ productLink dessert.slug }}">
-                        <img
-                            class="reviews__dessert"
-                            src="{{ imageLink review.dessert.images.[0].uuid }}"
-                            alt="{{ review.dessert.name }}"
-                        />
-                    </a>
-                    <a class="reviews__details" href="{{ productLink dessert.slug }}">
-                        Подробнее
-                    </a>
-                {{/if}}
-            </div>
-        {{/each}}
+        {{#if (isListNotEmpty reviews) }}
+            {{#if isAddButton }}
+                <button class="reviews__create createReviewAction">
+                    Добавить отзыв
+                </button>
+            {{/if }}
+        {{/if }}
     </div>
+    {{#if (isListNotEmpty reviews) }}
+        <div id="reviewsListSlider" class="splide">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    {{#each reviews as |review| }}
+                        <div class="splide__slide reviews__item">
+                            <img
+                                class="reviews__image"
+                                src="{{ imageLink review.photo.uuid }}"
+                                alt="{{ review.name }}"
+                            />
+                            <div class="reviews__person">
+                                <h4 class="reviews__name">
+                                    {{ review.name }}
+                                </h4>
+                                <div class="reviews__rating">
+                                    {{> rating rating=review.rating }}
+                                </div>
+                            </div>
+                            <p class="reviews__text">
+                                {{ review.text }}
+                            </p>
+                            {{#if review.dessert }}
+                                <a class="reviews__link" href="{{ productLink dessert.slug }}">
+                                    <img
+                                        class="reviews__dessert"
+                                        src="{{ imageLink review.dessert.images.[0].uuid }}"
+                                        alt="{{ review.dessert.name }}"
+                                    />
+                                </a>
+                                <a class="reviews__details" href="{{ productLink dessert.slug }}">
+                                    Подробнее
+                                </a>
+                            {{/if}}
+                        </div>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    {{else}}
+        {{#if isAddButton }}
+            <div class="reviews__action createReviewAction">
+                <span class="reviews__action--plus"></span>
+                <p class="reviews__action--text">Оставьте первый отзыв и помогите с выбором новым покупателям!</p>
+            </div>
+        {{/if }}
+    {{/if }}
 </div>
