@@ -62,6 +62,19 @@ export class HandlebarsConfig {
         return count <= rating;
     }
 
+    private isStarHalf(count: number, rating: number): boolean {
+        const diff = count - rating;
+        return diff > 0 && diff < 1;
+    }
+
+    private isListNotEmpty(list: unknown): boolean {
+        return Array.isArray(list) && list.length > 0;
+    }
+
+    private isRatingChecked(count: number, current: number): boolean {
+        return count === current;
+    }
+
     private conditionalClass(condition: boolean, cn: string): string {
         return condition ? cn : '';
     }
@@ -112,6 +125,9 @@ export class HandlebarsConfig {
             times: (n: number, block: HelperOptions): string => this.getTimes(n, block),
             conditionalClass: (condition: boolean, cn: string): string => this.conditionalClass(condition, cn),
             isStarActive: (count: number, rating: number): boolean => this.isStarActive(count, rating),
+            isStarHalf: (count: number, rating: number): boolean => this.isStarHalf(count, rating),
+            isListNotEmpty: (list: unknown): boolean => this.isListNotEmpty(list),
+            isRatingChecked: (count: number, current: number): boolean => this.isRatingChecked(count, current),
             baseURL: (link: string, isMainPage?: string): string => this.baseURL(link, isMainPage),
             imageLink: (imageUUID: string): string => this.imageURL(imageUUID),
             productLink: (slug: string): string => this.productLink(slug),

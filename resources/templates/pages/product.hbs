@@ -1,8 +1,8 @@
 {{> navbar }}
 
-<main class="main">
+<main class="main main__padding">
     <div class="main__background" style="background-image: url({{ manifest 'assets/background.webp' }});"></div>
-    <div class="main__container main__padding">
+    <div class="main__container">
         <div class="main__column">
             <div class="main__gallery">
                 <div id="product_main_slider" class="splide">
@@ -51,17 +51,23 @@
             </div>
         </div>
     </div>
-    <div class="main__reviews">
-        {{> reviews reviews=dessert.reviews }}
-    </div>
 </main>
 
 {{> advantages }}
 
+{{> reviews reviews=reviews isAddButton=true }}
+
+{{> information isMainPage=isMainPage }}
+
 {{> catalog title='Похожие десерты' desserts=related }}
 
-{{> footer instagram=instagram reviews=reviews }}
+{{> personal instagram=instagram }}
+
+{{> credits }}
+
 
 {{> tooltip_parameters }}
 
-{{> tooltip_price }}
+{{> tooltip_price dessert=dessert }}
+
+{{> review_form dessert=dessert }}

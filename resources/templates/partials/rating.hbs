@@ -2,13 +2,11 @@
     <div class="rating__stars">
         {{#times 5 }}
             {{#if (isStarActive this ../rating) }}
-                <svg class="rating__star rating__star_active">
-                    <use xlink:href="{{ manifest 'assets/star.svg' }}#star"></use>
-                </svg>
+                <img class="rating__img" src="{{ manifest 'assets/star-active.svg' }}" />
+            {{else if (isStarHalf this ../rating) }}
+                <img class="rating__img" src="{{ manifest 'assets/star-half.svg' }}" />
             {{else}}
-                <svg class="rating__star">
-                    <use xlink:href="{{ manifest 'assets/star.svg' }}#star"></use>
-                </svg>
+                <img class="rating__img" src="{{ manifest 'assets/star-disabled.svg' }}" />
             {{/if}}
         {{/times}}
     </div>

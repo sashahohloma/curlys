@@ -1,21 +1,22 @@
-@include responsive($max: $breakpoint-sm) {
+@include responsive($max: $breakpoint-md) {
     .reviews {
-
-        &__list {
-            grid-template-columns: 100%;
+        &__header {
+            flex-direction: column;
+            row-gap: 20px;
         }
-
         &__title {
-            font-size: 2.4em;
-            text-align: center;
+            font-size: 2em;
         }
-    }    
+    }  
 }
 
 
 
-@include responsive($min: $breakpoint-sm) {
+@include responsive($min: $breakpoint-md) {
     .reviews {
+        &__header {
+            flex-direction: row;
+        }
         &__title {
             font-size: 3em;
         }
@@ -24,55 +25,32 @@
 
 
 
-@include responsive($min: $breakpoint-sm, $max: $breakpoint-md) {
-    .reviews {
-        &__list {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }    
-}
-
-
-
-@include responsive($min: $breakpoint-md, $max: $breakpoint-xl) {
-    .reviews {
-
-        &__list {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    }    
-}
-
-
-
-@include responsive($min: $breakpoint-xl) {
-    .reviews {
-
-        &__list {
-            grid-template-columns: repeat(4, 1fr);
-        }
-    }    
-}
-
-
-
 .reviews {
     @include container();
 
-    display: grid;
-    grid-template-columns: 100%;
+    display: flex;
+    flex-direction: column;
     row-gap: 30px;
+
+    padding-top: 60px;
+    padding-bottom: 60px;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
     &__title {
         display: block;
         margin: 0;
 
         @include fontTitle();
+        text-align: center;
     }
 
-    &__list {
-        display: grid;
-        gap: 20px;
+    &__create {
+        @include button($color-red);
     }
 
     &__item {
@@ -134,5 +112,52 @@
 
     &__details {
         @include button($color-red);
+    }
+
+    &__action {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        row-gap: 15px;
+        max-width: 280px;
+        width: 100%;
+        padding: 30px;
+        background: $color-red;
+        border-radius: $border-radius;
+    
+        transition-duration: .15s;
+
+        @include fontTitle();
+        cursor: pointer;
+
+        &:hover {
+            background-color: darken($color-red, 10);
+        }
+
+        &--plus {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $color-white;
+            border-radius: 50%;
+
+            &::before {
+                content: "+";
+                display: block;
+                margin-top: 2px;
+                color: $color-red;
+                font-size: 2.4em;
+                line-height: 0.6;
+            }
+        }
+
+        &--text {
+            margin: 0;
+            font-size: 1.1428em;
+            text-align: center;
+            color: $color-white;
+        }
     }
 }

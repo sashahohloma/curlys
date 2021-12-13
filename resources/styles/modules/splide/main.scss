@@ -1,0 +1,19 @@
+.splide {
+    &__arrow {
+        width: 3em;
+        height: 3em;
+        background: darken($color-gray, 20);
+
+        svg {
+            fill: $color-black;
+        }
+
+        &--prev {
+            left: -1.5em;
+        }
+
+        &--next {
+            right: -1.5em;
+        }
+    }
+}

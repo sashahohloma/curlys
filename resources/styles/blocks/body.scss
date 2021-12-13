@@ -4,6 +4,7 @@
 
 body {
     overflow-x: hidden;
+    margin: 0;
 
     @include fontText;
     font-size: 14px;
@@ -12,4 +13,19 @@ body {
 
 svg {
     fill: currentColor;
+}
+
+label {
+    display: inline-block;
+}
+
+input,
+button,
+select,
+optgroup,
+textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: 1em;
+    line-height: inherit;
 }

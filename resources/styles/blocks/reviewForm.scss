@@ -1,0 +1,170 @@
+.modal-backdrop {
+    @include backgroundGradient;
+
+    &.show {
+        opacity: 0.98 !important;
+    }
+}
+
+.reviewFormModal {
+
+    .modal-body {
+        padding: 30px;
+    }
+
+    .invalid-feedback {
+        font-weight: 600;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+        @include fontText();
+        font-size: 1rem;
+    }
+
+    &__header {
+        display: flex;
+        flex-direction: column;
+        row-gap: 5px;
+        position: relative;
+        padding-right: 34px;
+    }
+
+    &__title {
+        display: block;
+        margin: 0;
+
+        @include fontTitle();
+        font-size: 2em;
+    }
+
+    &__description {
+        display: block;
+        margin: 0;
+
+        @include fontText();
+        font-size: 0.8571rem;
+        color: lighten($color-black, 30);
+    }
+
+    &__closeIcon {
+        position: absolute;
+        top: -15px;
+        right: -15px;
+    }
+
+    &__body {
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+    }
+
+    &__photoField {
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        column-gap: 15px;
+        padding: 15px;
+        background-color: $color-gray;
+        border-radius: $border-radius;
+        color: darken($color-gray, 50%);
+        font-weight: 600;
+        cursor: pointer;
+
+        &--placeholder {
+            width: 60px;
+            height: 60px;
+            overflow: hidden;
+            border-radius: 50%;
+            background-color: $color-white;
+            border: 2px dotted darken($color-gray, 50%);
+        }
+
+        &--preview {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+
+            opacity: 0;
+            visibility: hidden;
+
+            &__visible {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+
+        &--input {
+            position: absolute;
+            top: 0;
+            opacity: 0;
+            width: 0;
+        }
+
+        &--remove {
+            display: block;
+            margin: 0;
+            padding: 5px 10px;
+            background: $color-red;
+            border: 0;
+            border-radius: $border-radius;
+
+            opacity: 0;
+            visibility: hidden;
+
+            @include fontText();
+            font-size: 0.8571em;
+            font-weight: 600;
+            color: $color-white;
+
+            &__visible {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+
+    &__rating {
+        display: flex;
+        column-gap: 10px;
+
+        &--label {
+            display: flex;
+            cursor: pointer;
+        }
+
+        &--star {
+            display: flex;
+            width: 21px;
+            height: 20px;
+            color: darken($color-gray, 20);
+
+            &_active {
+                color: $color-orange;
+            }
+        }
+
+        &--input {
+            position: absolute;
+            top: 0;
+            opacity: 0;
+            width: 0;
+        }
+    }
+
+    &__footer {
+        display: flex;
+        column-gap: 20px;
+    }
+
+    &__submit {
+        @include button($color-orange);
+    }
+
+    &__close {
+        @include button($color-red);
+    }
+}
